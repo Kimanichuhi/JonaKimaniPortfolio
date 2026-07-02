@@ -1,0 +1,841 @@
+export interface Project {
+  id: string;
+  name: string;
+  url: string;
+  category: string;
+  description: string;
+  shortDescription: string;
+  tags: string[];
+  technologies: string[];
+  featured: boolean;
+  date: string;
+  image: string | null;
+  details: {
+    overview: string;
+    problem: string;
+    objectives: string[];
+    features: string[];
+    architecture: string;
+    challenges: string[];
+    solutions: string[];
+    lessons: string[];
+    futureImprovements: string[];
+  };
+}
+
+export const projects: Project[] = [
+  {
+    id: 'fleet-manager-os',
+    name: 'Fleet Manager OS',
+    url: 'https://fleetmanageros.lovable.app',
+    category: 'Operations',
+    description: 'A comprehensive fleet management platform designed to help organizations monitor vehicles, manage maintenance schedules, track fuel consumption, assign drivers, monitor trips, generate reports, and improve operational efficiency.',
+    shortDescription: 'Comprehensive fleet management for vehicle tracking, maintenance, and operations.',
+    tags: ['Fleet', 'GPS', 'Logistics', 'Operations', 'Dashboard'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL'],
+    featured: true,
+    date: '2025-03-15',
+    image: null,
+    details: {
+      overview: 'Fleet Manager OS is an enterprise-grade fleet management solution that provides real-time visibility into vehicle operations, helping organizations optimize their fleet performance and reduce operational costs.',
+      problem: 'Organizations struggle with manual fleet tracking processes that lead to inefficient vehicle utilization, missed maintenance schedules, fuel wastage, and lack of visibility into driver behavior and trip history.',
+      objectives: [
+        'Provide real-time vehicle tracking and monitoring',
+        'Automate maintenance scheduling and reminders',
+        'Track fuel consumption and identify inefficiencies',
+        'Enable efficient driver assignment and management',
+        'Generate comprehensive operational reports'
+      ],
+      features: [
+        'Real-time GPS vehicle tracking',
+        'Automated maintenance scheduling',
+        'Fuel consumption monitoring and analytics',
+        'Driver assignment and performance tracking',
+        'Trip monitoring and history',
+        'Comprehensive reporting dashboard',
+        'Alert system for maintenance and anomalies',
+        'Multi-vehicle fleet overview'
+      ],
+      architecture: 'Built with a modern React frontend connected to a Supabase backend. Real-time updates via WebSocket connections. PostgreSQL database for robust data storage with optimized queries for fleet analytics.',
+      challenges: [
+        'Handling real-time GPS data streams efficiently',
+        'Designing intuitive dashboard for complex fleet data',
+        'Implementing reliable alert systems',
+        'Managing large datasets for reporting'
+      ],
+      solutions: [
+        'Implemented efficient data pagination and caching',
+        'Created modular dashboard components',
+        'Built a robust notification queue system',
+        'Optimized database queries for analytics'
+      ],
+      lessons: [
+        'User feedback is crucial for dashboard design',
+        'Real-time systems require careful state management',
+        'Performance optimization should be ongoing'
+      ],
+      futureImprovements: [
+        'AI-powered route optimization',
+        'Predictive maintenance using ML',
+        'Mobile app for drivers',
+        'Integration with IoT sensors'
+      ]
+    }
+  },
+  {
+    id: 'fawdas-v3',
+    name: 'FAWDAS v3',
+    url: 'https://fawdas3.lovable.app',
+    category: 'Agriculture',
+    description: 'A digital agriculture platform that streamlines farm management, farmer registration, extension services, production monitoring, market linkage, and agricultural reporting.',
+    shortDescription: 'Digital agriculture platform for farm management and extension services.',
+    tags: ['Agriculture', 'Farm', 'Extension', 'Reports'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'Node.js'],
+    featured: true,
+    date: '2024-11-20',
+    image: null,
+    details: {
+      overview: 'FAWDAS v3 is a comprehensive digital agriculture platform designed to modernize farming operations, connecting farmers with extension services, market opportunities, and production insights.',
+      problem: 'Agricultural sector lacks digital infrastructure for farmer registration, extension service delivery, and production monitoring, leading to data gaps and inefficient service delivery.',
+      objectives: [
+        'Digitize farmer registration and profiling',
+        'Enable extension officer management',
+        'Monitor agricultural production',
+        'Facilitate market linkages',
+        'Generate agricultural reports'
+      ],
+      features: [
+        'Farmer registration and profile management',
+        'Extension service coordination',
+        'Production monitoring dashboards',
+        'Market price information',
+        'Agricultural reporting tools',
+        'Geographic mapping of farms'
+      ],
+      architecture: 'React-based progressive web app with offline capabilities. Supabase backend with PostgreSQL for relational data. Designed for rural connectivity challenges.',
+      challenges: [
+        'Building for low-connectivity environments',
+        'Complex farmer data relationships',
+        'Regional deployment constraints',
+        'User adoption in rural areas'
+      ],
+      solutions: [
+        'Implemented offline-first architecture',
+        'Created intuitive data models',
+        'Built training materials into the platform',
+        'Designed for simplicity and accessibility'
+      ],
+      lessons: [
+        'Offline support is essential for rural deployments',
+        'Simple UI improves adoption rates',
+        'Local language support matters'
+      ],
+      futureImprovements: [
+        'AI-powered crop recommendations',
+        'Satellite imagery integration',
+        'Mobile money integrations',
+        'Voice-based interfaces'
+      ]
+    }
+  },
+  {
+    id: 'farmer-finance',
+    name: 'Farmer Finance',
+    url: 'https://farmerfinance.lovable.app',
+    category: 'Finance',
+    description: 'A financial management platform tailored for farmers to manage savings, loans, expenses, income, budgeting, and financial planning.',
+    shortDescription: 'Financial management platform designed specifically for farmers.',
+    tags: ['Finance', 'Loans', 'Budgeting', 'Agriculture'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL'],
+    featured: false,
+    date: '2024-09-10',
+    image: null,
+    details: {
+      overview: 'Farmer Finance is a specialized financial platform that empowers farmers with tools for managing their agricultural finances, from savings to loans and everything in between.',
+      problem: 'Farmers lack access to digital financial tools tailored to their unique income cycles and financial needs, leading to poor financial planning and limited access to credit.',
+      objectives: [
+        'Provide farmer-specific financial tracking',
+        'Enable savings goal management',
+        'Facilitate loan applications and tracking',
+        'Support budgeting for agricultural cycles',
+        'Generate financial insights'
+      ],
+      features: [
+        'Income and expense tracking',
+        'Savings goals and progress',
+        'Loan management and reminders',
+        'Budget planning tools',
+        'Financial reports and insights',
+        'Seasonal planning'
+      ],
+      architecture: 'Modern React application with Supabase backend. Secure financial data handling with encryption. REST API integrations for financial services.',
+      challenges: [
+        'Security for financial data',
+        'Seasonal income modeling',
+        'Building trust with users',
+        'Complex reporting requirements'
+      ],
+      solutions: [
+        'Implemented end-to-end encryption',
+        'Created flexible income tracking',
+        'Built transparent audit trails',
+        'Designed clear financial reports'
+      ],
+      lessons: [
+        'Security must be built in from the start',
+        'Seasonal awareness is crucial for farming finances',
+        'Simple visuals build trust'
+      ],
+      futureImprovements: [
+        'Integration with mobile money',
+        'Credit scoring for farmers',
+        'Investment tracking',
+        'Financial literacy modules'
+      ]
+    }
+  },
+  {
+    id: 'find-flats',
+    name: 'Find Flats',
+    url: 'https://findflats.lovable.app',
+    category: 'Real Estate',
+    description: 'A property discovery platform enabling users to search, compare, and inquire about rental houses, apartments, and commercial properties.',
+    shortDescription: 'Property discovery platform for rentals and commercial spaces.',
+    tags: ['Property', 'Rental', 'Real Estate'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL'],
+    featured: false,
+    date: '2024-07-25',
+    image: null,
+    details: {
+      overview: 'Find Flats is a real estate platform that simplifies the property search experience, helping users find their ideal rental property with advanced filtering and comparison tools.',
+      problem: 'Property seekers face fragmented listings, lack of verified information, and difficulty comparing options across different neighborhoods and price points.',
+      objectives: [
+        'Centralize property listings',
+        'Enable advanced search and filtering',
+        'Provide property comparison tools',
+        'Facilitate direct communication with agents',
+        'Ensure listing verification'
+      ],
+      features: [
+        'Advanced search with multiple filters',
+        'Property comparison feature',
+        'Neighborhood information',
+        'Direct inquiry system',
+        'Saved searches and favorites',
+        'Price trend analysis'
+      ],
+      architecture: 'React frontend with dynamic filtering. Supabase for data storage and authentication. Image optimization for fast property gallery loading.',
+      challenges: [
+        'High-quality image management',
+        'Real-time availability updates',
+        'Geographic search optimization',
+        'Agent verification workflow'
+      ],
+      solutions: [
+        'Implemented lazy loading for images',
+        'Built status update system',
+        'Used efficient geo-indexing',
+        'Created verification pipeline'
+      ],
+      lessons: [
+        'Image optimization is crucial for real estate',
+        'Location filters must be intuitive',
+        'Trust signals increase conversions'
+      ],
+      futureImprovements: [
+        'Virtual tour integration',
+        'AI-powered recommendations',
+        'Mortgage calculator integration',
+        'Tenant review system'
+      ]
+    }
+  },
+  {
+    id: 'cdf-bursary',
+    name: 'CDF Bursary',
+    url: 'https://cdfbursary.lovable.app',
+    category: 'Government',
+    description: 'A bursary management platform digitizing applications, approvals, verification, fund allocation, and reporting for educational support programs.',
+    shortDescription: 'Digital bursary management for educational support programs.',
+    tags: ['Government', 'Education', 'Bursary'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'Authentication'],
+    featured: true,
+    date: '2024-05-15',
+    image: null,
+    details: {
+      overview: 'CDF Bursary is a government-focused platform that streamlines the entire bursary lifecycle, from application to disbursement, ensuring transparency and efficiency in educational funding.',
+      problem: 'Manual bursary processes are prone to delays, errors, and lack of transparency, making it difficult for students to access educational funding and for administrators to manage allocations.',
+      objectives: [
+        'Digitize bursary applications',
+        'Streamline approval workflows',
+        'Enable verification processes',
+        'Track fund allocation',
+        'Generate compliance reports'
+      ],
+      features: [
+        'Online application portal',
+        'Document upload and verification',
+        'Multi-level approval workflow',
+        'Fund tracking and disbursement',
+        'Comprehensive reporting',
+        'Applicant communication system'
+      ],
+      architecture: 'Enterprise-grade React application with role-based access control. Supabase backend with audit logging. Workflow engine for approval processes.',
+      challenges: [
+        'Complex approval workflows',
+        'Document security requirements',
+        'Integration with government systems',
+        'High-volume application periods'
+      ],
+      solutions: [
+        'Built configurable workflow engine',
+        'Implemented secure document handling',
+        'Created API integration layer',
+        'Designed for horizontal scaling'
+      ],
+      lessons: [
+        'Workflow flexibility is essential',
+        'Audit trails build trust',
+        'User roles must be carefully designed'
+      ],
+      futureImprovements: [
+        'Mobile application for students',
+        'SMS notification integration',
+        'Predictive analytics for budgeting',
+        'Integration with school systems'
+      ]
+    }
+  },
+  {
+    id: 'farm-aid',
+    name: 'Farm Aid',
+    url: 'https://farmaid.lovable.app',
+    category: 'Healthcare',
+    description: 'An agricultural support platform connecting farmers with veterinary services, extension officers, agronomists, and emergency farm assistance.',
+    shortDescription: 'Agricultural support connecting farmers with experts and services.',
+    tags: ['Agriculture', 'Healthcare', 'Support'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'REST API'],
+    featured: false,
+    date: '2024-04-01',
+    image: null,
+    details: {
+      overview: 'Farm Aid bridges the gap between farmers and agricultural support services, providing quick access to veterinary care, expert advice, and emergency assistance when needed most.',
+      problem: 'Farmers struggle to access timely veterinary services and expert agricultural advice, leading to preventable livestock losses and crop failures.',
+      objectives: [
+        'Connect farmers with veterinarians',
+        'Provide access to agronomists',
+        'Enable emergency assistance requests',
+        'Facilitate extension officer coordination',
+        'Track service delivery'
+      ],
+      features: [
+        'Veterinarian directory and booking',
+        'Expert consultation system',
+        'Emergency request handling',
+        'Service tracking and history',
+        'Resource library',
+        'Location-based provider matching'
+      ],
+      architecture: 'React PWA with real-time messaging. Supabase backend with geolocation features. Optimized for mobile-first usage in the field.',
+      challenges: [
+        'Real-time communication needs',
+        'Geographic provider matching',
+        'Offline functionality requirements',
+        'Emergency response prioritization'
+      ],
+      solutions: [
+        'Implemented WebSocket messaging',
+        'Used geospatial queries',
+        'Built offline-capable interface',
+        'Created priority queue system'
+      ],
+      lessons: [
+        'Mobile-first design is critical',
+        'Response time matters in emergencies',
+        'Simple interfaces save lives'
+      ],
+      futureImprovements: [
+        'Telehealth video consultations',
+        'AI-powered diagnosis assistance',
+        'Integration with weather services',
+        'Community knowledge sharing'
+      ]
+    }
+  },
+  {
+    id: 'fawdas-v4',
+    name: 'FAWDAS v4',
+    url: 'https://fawdas4.lovable.app',
+    category: 'Agriculture',
+    description: 'An improved version of FAWDAS featuring AI integration, enhanced analytics, production forecasting, farmer insights, and smarter decision-making.',
+    shortDescription: 'AI-powered agriculture platform with advanced analytics and insights.',
+    tags: ['AI', 'Agriculture', 'Analytics'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'AI', 'Machine Learning'],
+    featured: true,
+    date: '2025-01-10',
+    image: null,
+    details: {
+      overview: 'FAWDAS v4 represents the evolution of digital agriculture, incorporating artificial intelligence to provide predictive insights, production forecasting, and data-driven recommendations for farmers and agricultural stakeholders.',
+      problem: 'Agricultural decisions are often based on incomplete data and intuition, leading to suboptimal yields and resource allocation.',
+      objectives: [
+        'Integrate AI for predictive analytics',
+        'Provide production forecasting',
+        'Generate actionable farmer insights',
+        'Enable data-driven decision making',
+        'Improve upon FAWDAS v3 capabilities'
+      ],
+      features: [
+        'AI-powered yield predictions',
+        'Production forecasting dashboard',
+        'Smart recommendations engine',
+        'Enhanced farmer profiling',
+        'Risk assessment tools',
+        'Market trend analysis',
+        'Weather integration'
+      ],
+      architecture: 'Modern React application with AI integration layer. Machine learning models for predictions. Supabase with extended analytics capabilities.',
+      challenges: [
+        'Training AI models with agricultural data',
+        'Balancing accuracy with interpretability',
+        'Real-time prediction requirements',
+        'User trust in AI recommendations'
+      ],
+      solutions: [
+        'Collaborated with agricultural experts',
+        'Built explainable AI features',
+        'Implemented efficient prediction caching',
+        'Created confidence indicators'
+      ],
+      lessons: [
+        'AI must be explained to build trust',
+        'Domain expertise improves models',
+        'Iterative improvement is key'
+      ],
+      futureImprovements: [
+        'Computer vision for crop disease detection',
+        'Satellite imagery analysis',
+        'IoT sensor integration',
+        'Regional model customization'
+      ]
+    }
+  },
+  {
+    id: 'seeding-ai',
+    name: 'Seeding AI',
+    url: 'https://seedingai.lovable.app',
+    category: 'AI',
+    description: 'An AI-powered agricultural recommendation platform providing intelligent crop planning, seed selection, weather insights, and productivity optimization.',
+    shortDescription: 'AI-powered crop planning and seed selection recommendation engine.',
+    tags: ['AI', 'Machine Learning', 'Agriculture'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'AI', 'Machine Learning', 'OpenAI'],
+    featured: true,
+    date: '2025-02-28',
+    image: null,
+    details: {
+      overview: 'Seeding AI leverages artificial intelligence to help farmers make optimal decisions about crop selection, planting schedules, and resource allocation based on environmental and market factors.',
+      problem: 'Farmers lack access to scientific guidance on crop selection and timing, leading to poor yields and wasted resources on unsuitable crops.',
+      objectives: [
+        'Provide AI-driven crop recommendations',
+        'Optimize seed selection',
+        'Integrate weather insights',
+        'Maximize productivity',
+        'Reduce trial-and-error farming'
+      ],
+      features: [
+        'Intelligent crop planning',
+        'Seed variety recommendations',
+        'Weather-aware scheduling',
+        'Soil analysis integration',
+        'Market demand predictions',
+        'Resource optimization'
+      ],
+      architecture: 'React frontend with AI service integration. OpenAI models for natural language recommendations. Supabase for data persistence and user management.',
+      challenges: [
+        'Complex agricultural domain modeling',
+        'Real-time weather data integration',
+        'Balancing multiple recommendation factors',
+        'Making AI accessible to rural farmers'
+      ],
+      solutions: [
+        'Partnered with agricultural scientists',
+        'Integrated multiple weather APIs',
+        'Built weighted scoring algorithms',
+        'Created simple, visual interfaces'
+      ],
+      lessons: [
+        'Domain knowledge is as valuable as tech',
+        'Simple visualizations beat complex data',
+        'Weather data must be local'
+      ],
+      futureImprovements: [
+        'Mobile app with voice interface',
+        'Local language support',
+        'Community knowledge integration',
+        'Historical yield tracking'
+      ]
+    }
+  },
+  {
+    id: 'mavqon-agro-ai',
+    name: 'MAVQON Agro AI',
+    url: 'https://mavqon-agro-ai.lovable.app',
+    category: 'AI',
+    description: 'An intelligent agricultural assistant delivering predictive analytics, disease detection, crop recommendations, and precision farming support.',
+    shortDescription: 'Intelligent agricultural assistant with disease detection and analytics.',
+    tags: ['AI', 'Agriculture', 'Vision', 'Analytics'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'AI', 'Machine Learning', 'Computer Vision'],
+    featured: true,
+    date: '2025-04-12',
+    image: null,
+    details: {
+      overview: 'MAVQON Agro AI combines computer vision and predictive analytics to help farmers identify crop diseases early, optimize inputs, and implement precision farming techniques.',
+      problem: 'Crop diseases are often detected too late, causing significant yield losses. Farmers lack access to precision farming tools and expert diagnostic capabilities.',
+      objectives: [
+        'Enable early disease detection',
+        'Provide precision farming guidance',
+        'Deliver predictive analytics',
+        'Optimize input usage',
+        'Support sustainable farming'
+      ],
+      features: [
+        'Image-based disease detection',
+        'Precision farming recommendations',
+        'Predictive yield analytics',
+        'Input optimization calculator',
+        'Treatment recommendations',
+        'Historical tracking'
+      ],
+      architecture: 'React application with computer vision model integration. TensorFlow models for disease detection. Supabase for data management and reporting.',
+      challenges: [
+        'Training disease detection models',
+        'Mobile image capture quality',
+        'Processing speed requirements',
+        'Model accuracy in varied conditions'
+      ],
+      solutions: [
+        'Used transfer learning techniques',
+        'Added image quality checks',
+        'Implemented edge processing',
+        'Created confidence thresholds'
+      ],
+      lessons: [
+        'Edge cases define model quality',
+        'User patience varies with value',
+        'Continuous model improvement needed'
+      ],
+      futureImprovements: [
+        'Real-time field monitoring drones',
+        'Expanded disease database',
+        'Offline mobile capabilities',
+        'Integration with farm equipment'
+      ]
+    }
+  },
+  {
+    id: 'estateos-ke',
+    name: 'EstateOS KE',
+    url: 'https://estateoske.lovable.app',
+    category: 'Real Estate',
+    description: 'A complete property management system for landlords and estate managers including tenants, rent collection, maintenance, invoices, and reporting.',
+    shortDescription: 'Complete property management system for landlords and estate managers.',
+    tags: ['Property', 'Management', 'Rent'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'Node.js'],
+    featured: false,
+    date: '2024-12-05',
+    image: null,
+    details: {
+      overview: 'EstateOS KE is a comprehensive property management solution that helps landlords and estate managers streamline operations from tenant management to financial reporting.',
+      problem: 'Property managers handle tenant relations, rent collection, maintenance, and finances across fragmented systems, leading to inefficiency and revenue leakage.',
+      objectives: [
+        'Centralize tenant management',
+        'Automate rent collection tracking',
+        'Streamline maintenance requests',
+        'Simplify invoice generation',
+        'Provide financial reporting'
+      ],
+      features: [
+        'Tenant portal and management',
+        'Rent tracking and reminders',
+        'Maintenance request system',
+        'Invoice generation',
+        'Vacancy tracking',
+        'Financial reports and analytics',
+        'Property portfolio dashboard'
+      ],
+      architecture: 'React dashboard with role-based views. Supabase for data and authentication. Automated scheduling for reminders and reports.',
+      challenges: [
+        'Complex user roles and permissions',
+        'Automated reminder reliability',
+        'Multi-property management',
+        'Financial calculation accuracy'
+      ],
+      solutions: [
+        'Implemented granular RBAC',
+        'Built robust notification system',
+        'Created property switching UI',
+        'Added calculation audit trails'
+      ],
+      lessons: [
+        'Permissions must be flexible',
+        'Automation saves significant time',
+        'Clear dashboards improve compliance'
+      ],
+      futureImprovements: [
+        'Mobile payment integration',
+        'Tenant verification services',
+        ' Lease document generation',
+        'Market comparison analytics'
+      ]
+    }
+  },
+  {
+    id: 'tuzidi',
+    name: 'Tuzidi',
+    url: 'https://tuzidi.lovable.app',
+    category: 'Community',
+    description: 'A digital empowerment platform focused on community engagement, opportunity sharing, collaboration, and development initiatives.',
+    shortDescription: 'Community empowerment platform for engagement and collaboration.',
+    tags: ['Community', 'Development'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'Authentication'],
+    featured: false,
+    date: '2024-08-20',
+    image: null,
+    details: {
+      overview: 'Tuzidi is a community-focused platform that empowers users to connect, share opportunities, collaborate on initiatives, and drive local development.',
+      problem: 'Communities lack digital spaces for organizing, sharing opportunities, and coordinating development initiatives effectively.',
+      objectives: [
+        'Enable community engagement',
+        'Share opportunities broadly',
+        'Facilitate collaboration',
+        'Track development initiatives',
+        'Build community networks'
+      ],
+      features: [
+        'Community forums',
+        'Opportunity marketplace',
+        'Initiative tracking',
+        'Member directory',
+        'Event management',
+        'Resource sharing'
+      ],
+      architecture: 'React social platform with real-time features. Supabase for data, auth, and real-time subscriptions. Designed for scalability.',
+      challenges: [
+        'Building engagement loops',
+        'Moderation requirements',
+        'Content quality control',
+        'Privacy considerations'
+      ],
+      solutions: [
+        'Created gamification elements',
+        'Built reporting and moderation tools',
+        'Implemented content flagging',
+        'Added privacy controls'
+      ],
+      lessons: [
+        'Engagement requires value',
+        'Community guidelines matter',
+        'Privacy builds trust'
+      ],
+      futureImprovements: [
+        'Mobile application',
+        'AI-powered matching',
+        'Integration with local services',
+        'Analytics for community health'
+      ]
+    }
+  },
+  {
+    id: 'lyric-genie-ke',
+    name: 'Lyric Genie KE',
+    url: 'https://lyricgenieke.lovable.app',
+    category: 'AI',
+    description: 'An AI-powered lyric generation platform helping musicians and creators generate creative song lyrics in multiple styles and genres.',
+    shortDescription: 'AI-powered lyric generation for musicians and creators.',
+    tags: ['AI', 'Music', 'Generator'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'AI', 'OpenAI'],
+    featured: false,
+    date: '2024-10-30',
+    image: null,
+    details: {
+      overview: 'Lyric Genie KE harnesses AI to help musicians, songwriters, and creators generate unique lyrics across multiple genres and styles, sparking creativity and overcoming writers block.',
+      problem: 'Songwriters and musicians often face creative blocks and struggle to generate lyrics that fit specific themes, moods, or genres.',
+      objectives: [
+        'Provide AI lyric generation',
+        'Support multiple genres and styles',
+        'Enable creative exploration',
+        'Save time in the creative process',
+        ' Inspire new musical ideas'
+      ],
+      features: [
+        'Multi-genre lyric generation',
+        'Theme-based creation',
+        'Style customization',
+        'Rhyme scheme options',
+        'Save and organize lyrics',
+        'Export capabilities'
+      ],
+      architecture: 'React creative tool with OpenAI integration. Supabase for user data and saved lyrics. Optimized prompts for creative output.',
+      challenges: [
+        'Generating creative, non-repetitive output',
+        'Cultural relevance in lyrics',
+        'Copyright concerns',
+        'User interface for creative work'
+      ],
+      solutions: [
+        'Fine-tuned prompts for variety',
+        'Incorporated local music styles',
+        'Added originality checking',
+        'Built intuitive creative UI'
+      ],
+      lessons: [
+        'AI is a creative partner, not replacement',
+        'User control improves satisfaction',
+        'Export options matter to creators'
+      ],
+      futureImprovements: [
+        'Audio lyric reading',
+        'Collaboration features',
+        'Melody suggestions',
+        'Integration with DAWs'
+      ]
+    }
+  },
+  {
+    id: 'qeem-studio',
+    name: 'Qeem Studio',
+    url: 'https://qeemstudio.lovable.app',
+    category: 'Creative',
+    description: 'A digital creative studio platform providing tools for branding, graphics, content creation, media management, and creative collaboration.',
+    shortDescription: 'Digital creative studio for branding and content creation.',
+    tags: ['Creative', 'Design', 'Studio'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'Cloud'],
+    featured: false,
+    date: '2024-06-15',
+    image: null,
+    details: {
+      overview: 'Qeem Studio is a comprehensive creative platform that empowers designers, marketers, and content creators with tools for branding, design, and media management.',
+      problem: 'Creative professionals and teams lack integrated tools for managing the full creative workflow from ideation to delivery.',
+      objectives: [
+        'Provide branding tools',
+        'Enable graphics creation workflows',
+        'Support content management',
+        'Facilitate creative collaboration',
+        'Streamline media organization'
+      ],
+      features: [
+        'Brand kit management',
+        'Design project tracking',
+        'Content calendar',
+        'Media library',
+        'Collaboration tools',
+        'Asset sharing'
+      ],
+      architecture: 'React creative workspace with Supabase backend. Cloud storage integration for media. Real-time collaboration features.',
+      challenges: [
+        'Large file handling',
+        'Real-time collaboration',
+        'Version control for designs',
+        'Creative workflow complexity'
+      ],
+      solutions: [
+        'Implemented chunked uploads',
+        'Used operational transforms',
+        'Built timeline-based versioning',
+        'Created workflow templates'
+      ],
+      lessons: [
+        'File management is critical',
+        'Collaboration requires real-time sync',
+        'Templates improve productivity'
+      ],
+      futureImprovements: [
+        'AI-powered design suggestions',
+        'Integrated design editor',
+        'Client feedback portal',
+        'Integration with design tools'
+      ]
+    }
+  },
+  {
+    id: 'edumanage-ke',
+    name: 'EduManage KE',
+    url: 'https://edumanageke.lovable.app',
+    category: 'Education',
+    description: 'A comprehensive education management platform supporting schools with admissions, attendance, academics, finance, examinations, communication, and administration.',
+    shortDescription: 'Complete school management ERP for educational institutions.',
+    tags: ['Education', 'School', 'ERP'],
+    technologies: ['React', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'Authentication', 'Node.js'],
+    featured: true,
+    date: '2025-05-01',
+    image: null,
+    details: {
+      overview: 'EduManage KE is an enterprise education management system that handles every aspect of school operations, from admissions to examinations and financial management.',
+      problem: 'Schools manage complex operations across admissions, academics, finance, and administration using fragmented systems, leading to inefficiency and data inconsistencies.',
+      objectives: [
+        'Streamline admissions',
+        'Track attendance efficiently',
+        'Manage academic records',
+        'Handle school finances',
+        'Administer examinations',
+        'Enable communication'
+      ],
+      features: [
+        'Admissions management',
+        'Attendance tracking',
+        'Gradebook and academic records',
+        'Fee management and invoicing',
+        'Examination scheduling and results',
+        'Parent communication portal',
+        'Staff management',
+        'Report generation'
+      ],
+      architecture: 'Enterprise React application with comprehensive RBAC. Supabase for secure data handling. Modular architecture for different school functions.',
+      challenges: [
+        'Complex permission hierarchies',
+        'Academic year transitions',
+        'Report card generation',
+        'Multi-stakeholder communication'
+      ],
+      solutions: [
+        'Built flexible role system',
+        'Implemented academic year archiving',
+        'Created template-based reports',
+        'Designed multi-channel messaging'
+      ],
+      lessons: [
+        'School workflows are complex',
+        'Permissions require careful design',
+        'Communication is critical'
+      ],
+      futureImprovements: [
+        'Learning management integration',
+        'AI-powered analytics',
+        'Mobile app for parents',
+        'Virtual classroom features'
+      ]
+    }
+  }
+];
+
+export const categories = [
+  { id: 'all', label: 'All' },
+  { id: 'ai', label: 'AI' },
+  { id: 'agriculture', label: 'Agriculture' },
+  { id: 'government', label: 'Government' },
+  { id: 'education', label: 'Education' },
+  { id: 'finance', label: 'Finance' },
+  { id: 'real-estate', label: 'Real Estate' },
+  { id: 'healthcare', label: 'Healthcare' },
+  { id: 'creative', label: 'Creative Tools' },
+  { id: 'operations', label: 'Enterprise' },
+  { id: 'community', label: 'Community' },
+];
+
+export const projectStats = {
+  total: 13,
+  industries: 9,
+  aiProjects: 4,
+  enterprise: 3,
+  government: 1,
+  agriculture: 3,
+};

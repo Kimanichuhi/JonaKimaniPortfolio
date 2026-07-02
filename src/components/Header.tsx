@@ -6,6 +6,7 @@ import { useSiteConfig } from '../lib/dataCache';
 const navLinks = [
   { path: '/', label: 'Home' },
   { path: '/about', label: 'About' },
+  { path: '/projects', label: 'Projects' },
   { path: '/work', label: 'Work' },
   { path: '/blog', label: 'Blog' },
   { path: '/speaking', label: 'Speaking' },
