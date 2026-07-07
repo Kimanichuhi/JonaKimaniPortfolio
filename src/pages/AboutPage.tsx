@@ -1,7 +1,8 @@
-import { Lightbulb, Heart, Globe, Users, BookOpen, Award } from 'lucide-react';
+import { Lightbulb, Heart, Globe, Users, BookOpen, Award, ExternalLink, Calendar, ArrowRight } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { useSiteConfig, useTimeline, useGalleryImages, useValues } from '../lib/dataCache';
+import { Link } from 'react-router-dom';
 
 const iconComponents: Record<string, React.ReactNode> = {
   Lightbulb: <Lightbulb size={24} />,
@@ -40,7 +41,15 @@ export default function AboutPage() {
                 <div className="absolute bottom-6 left-6 right-6">
                   <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
                     <div className="text-accent-400 font-semibold text-sm">CEO & Founder</div>
-                    <div className="text-white font-bold text-lg">Qeem Labs</div>
+                    <div className="text-white font-bold text-lg">Qeem Labs Ltd</div>
+                    <a
+                      href="https://qeemlabs.co.ke"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-white/60 hover:text-accent-400 transition-colors flex items-center gap-1 mt-1"
+                    >
+                      qeemlabs.co.ke <ExternalLink size={12} />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -168,6 +177,30 @@ export default function AboutPage() {
           </div>
         </section>
       )}
+
+      <section className="section-padding bg-gradient-to-r from-accent-500/20 to-teal-500/20">
+        <div className="container-default">
+          <AnimatedSection className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Connect</h2>
+            <p className="text-white/60 max-w-xl mx-auto mb-8">
+              Whether you have a project in mind, want to explore partnership opportunities, or just want to chat about tech in Africa — I'd love to hear from you.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/booking" className="btn-primary">
+                <Calendar size={18} className="mr-2" /> Book a Consultation
+              </Link>
+              <a
+                href="https://qeemlabs.co.ke"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+              >
+                Visit Qeem Labs <ExternalLink size={18} className="ml-2" />
+              </a>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
     </div>
   );
 }

@@ -87,14 +87,14 @@ export const timelineEvents = [
 
 export const ventures = [
   {
-    name: 'Qeem Labs',
+    name: 'Qeem Labs Ltd',
     role: 'CEO & Founder',
     type: 'Founder',
     duration: '2016 - Present',
     description: 'Full-stack digital agency building world-class products from Africa. Specializing in AI, SaaS, and custom enterprise solutions.',
     metrics: { revenue: '$10M+ ARR', users: '100K+', team: '50+' },
     achievements: ['Expanded to 8 African countries', 'Launched AI-powered product suite', 'Secured Series A funding', 'Named Top 50 Tech Leaders'],
-    link: 'https://qeemlabs.com',
+    link: 'https://qeemlabs.co.ke',
     image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {

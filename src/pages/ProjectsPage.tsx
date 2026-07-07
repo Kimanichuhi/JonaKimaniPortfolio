@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ExternalLink, ArrowRight, Calendar, Tag, Sparkles, Briefcase, Building2, Tractor, Heart, GraduationCap, DollarSign, Home, Users, Palette, BarChart3, X, SortAsc, SortDesc, Grid, List, Share2, Copy, Check, Star } from 'lucide-react';
+import { Search, ExternalLink, ArrowRight, Calendar, Tag, Sparkles, Briefcase, Building2, Tractor, Heart, GraduationCap, DollarSign, Home, Users, Palette, BarChart3, X, SortAsc, SortDesc, Grid, List, Copy, Check, Star } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { projects, categories, projectStats, Project } from '../data/projects';
@@ -378,8 +378,8 @@ export default function ProjectsPage() {
               Let's build something amazing together. Whether you need a full-stack application, AI integration, or digital transformation consulting.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/contact" className="btn-primary">
-                Hire Me <ArrowRight size={18} className="ml-2" />
+              <Link to="/booking" className="btn-primary">
+                <Calendar size={18} className="mr-2" /> Book a Consultation
               </Link>
               <Link to="/contact" className="btn-secondary">
                 Let's Build Something Amazing
@@ -398,6 +398,9 @@ export default function ProjectsPage() {
               <Link to="/resume" className="text-white/40 hover:text-white transition-colors">
                 Download CV
               </Link>
+              <a href="https://qeemlabs.co.ke" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">
+                Qeem Labs
+              </a>
             </div>
           </AnimatedSection>
         </div>

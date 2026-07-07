@@ -13,6 +13,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
+const BookingPage = lazy(() => import('./pages/BookingPage'));
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 
@@ -56,6 +57,7 @@ export default function App() {
               <Route path="/work" element={<PublicLayout><WorkPage /></PublicLayout>} />
               <Route path="/projects" element={<PublicLayout><ProjectsPage /></PublicLayout>} />
               <Route path="/projects/:id" element={<PublicLayout><ProjectDetailPage /></PublicLayout>} />
+              <Route path="/booking" element={<PublicLayout><BookingPage /></PublicLayout>} />
               <Route path="/blog" element={<PublicLayout><BlogPage /></PublicLayout>} />
               <Route path="/speaking" element={<PublicLayout><SpeakingPage /></PublicLayout>} />
               <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />

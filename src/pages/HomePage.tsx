@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Eye, Crown, Target, ChevronDown, ChevronUp, Star, ExternalLink } from 'lucide-react';
+import { ArrowRight, Eye, Crown, Target, ChevronDown, ChevronUp, Star, ExternalLink, Calendar, Building2, Zap, Globe, Users, Award } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import { useCounter, useScrollPosition } from '../hooks/useAnimations';
 import { useSiteConfig, useStats, usePillars, useTestimonials, useFaqItems, useVentures, useLogoPartners } from '../lib/dataCache';
@@ -180,11 +180,11 @@ export default function HomePage() {
             </HeroAnim>
 
             <HeroAnim delay={0.6} className="flex flex-wrap gap-4">
-              <Link to="/work" className="btn-primary">
-                View My Work <ArrowRight size={18} className="ml-2" />
+              <Link to="/projects" className="btn-primary">
+                View My Projects <ArrowRight size={18} className="ml-2" />
               </Link>
-              <Link to="/contact" className="btn-secondary">
-                Get in Touch
+              <Link to="/booking" className="btn-secondary">
+                <Calendar size={18} className="mr-2" /> Book Consultation
               </Link>
             </HeroAnim>
           </div>
@@ -277,8 +277,13 @@ export default function HomePage() {
             <AnimatedSection>
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
                 <div className="grid md:grid-cols-2">
-                  <div className="h-64 md:h-auto">
-                    {featuredVenture.image && <img src={featuredVenture.image} alt={featuredVenture.name} className="w-full h-full object-cover" />}
+                  <div className="h-64 md:h-auto relative">
+                    <img
+                      src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt={featuredVenture.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary-900/50 md:block hidden" />
                   </div>
                   <div className="p-8 md:p-10 flex flex-col justify-center">
                     <div className="inline-flex items-center gap-2 bg-accent-500/10 text-accent-400 rounded-full px-3 py-1 text-sm mb-4 w-fit">{featuredVenture.role}</div>
@@ -301,6 +306,107 @@ export default function HomePage() {
           </div>
         </section>
       )}
+
+      <section className="section-padding">
+        <div className="container-default">
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              About <span className="text-gradient">Qeem Labs Ltd</span>
+            </h2>
+            <p className="text-white/50 max-w-2xl mx-auto">
+              A world-class digital agency building innovative solutions from Africa for the global market.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <div className="grid lg:grid-cols-2 gap-8 mb-12">
+              <div className="bg-gradient-to-br from-accent-500/20 to-teal-500/20 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
+                <div className="h-64 relative">
+                  <img
+                    src="https://images.pexels.com/photos/3182811/pexels-photo-3182811.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Qeem Labs Team"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent" />
+                  <div className="absolute bottom-6 left-6">
+                    <span className="inline-flex items-center gap-2 bg-accent-500 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                      <Building2 size={16} /> Est. 2016
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-3">Building Africa's Digital Future</h3>
+                  <p className="text-white/60 leading-relaxed">
+                    Qeem Labs Ltd is a premier digital agency headquartered in Nairobi, Kenya. We specialize in AI-powered solutions, SaaS platforms, and enterprise digital transformation. Our team of 50+ experts serves clients across 8 African countries, delivering world-class products that compete globally.
+                  </p>
+                  <a
+                    href="https://qeemlabs.co.ke"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-accent-400 hover:text-accent-300 transition-colors text-sm font-medium mt-4"
+                  >
+                    Visit qeemlabs.co.ke <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 flex flex-col items-center text-center card-hover">
+                  <div className="w-12 h-12 rounded-xl bg-accent-500/15 flex items-center justify-center text-accent-400 mb-4">
+                    <Globe size={24} />
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">8+</div>
+                  <div className="text-white/50 text-sm">Countries Served</div>
+                </div>
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 flex flex-col items-center text-center card-hover">
+                  <div className="w-12 h-12 rounded-xl bg-teal-500/15 flex items-center justify-center text-teal-400 mb-4">
+                    <Users size={24} />
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">50+</div>
+                  <div className="text-white/50 text-sm">Team Members</div>
+                </div>
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 flex flex-col items-center text-center card-hover">
+                  <div className="w-12 h-12 rounded-xl bg-accent-500/15 flex items-center justify-center text-accent-400 mb-4">
+                    <Zap size={24} />
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">100K+</div>
+                  <div className="text-white/50 text-sm">Users Impacted</div>
+                </div>
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 flex flex-col items-center text-center card-hover">
+                  <div className="w-12 h-12 rounded-xl bg-teal-500/15 flex items-center justify-center text-teal-400 mb-4">
+                    <Award size={24} />
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">$10M+</div>
+                  <div className="text-white/50 text-sm">Annual Revenue</div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="section-padding bg-gradient-to-r from-accent-500/30 to-teal-500/30">
+        <div className="container-default">
+          <AnimatedSection className="text-center">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+              <Calendar size={16} className="text-accent-400" />
+              <span className="text-white/70 text-sm">Now Accepting New Clients</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Build Something <span className="text-gradient">Amazing</span></h2>
+            <p className="text-white/60 max-w-xl mx-auto mb-8">
+              Book a free consultation to discuss your project, get strategic advice, or explore partnership opportunities.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/booking" className="btn-primary text-lg">
+                <Calendar size={20} className="mr-2" /> Book a Consultation
+              </Link>
+              <Link to="/contact" className="btn-secondary text-lg">
+                Send a Message
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
       <section className="section-padding">
         <div className="container-default">

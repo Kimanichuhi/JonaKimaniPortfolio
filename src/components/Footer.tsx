@@ -82,7 +82,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm">&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <p className="text-white/40 text-sm">CEO of <a href="https://qeemlabs.com" target="_blank" rel="noopener noreferrer" className="text-accent-400 hover:text-accent-300 transition-colors">Qeem Labs</a></p>
+          <p className="text-white/40 text-sm">CEO of <a href="https://qeemlabs.co.ke" target="_blank" rel="noopener noreferrer" className="text-accent-400 hover:text-accent-300 transition-colors">Qeem Labs Ltd</a></p>
         </div>
       </div>
     </footer>
