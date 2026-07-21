@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useAuth } from '../../lib/auth';
+import { useAuth } from '../../lib/useAuth';
 import {
   Settings, BarChart3, Columns, MessageSquare, Clock, Briefcase,
   FileText, Mic, Newspaper, HelpCircle, FileBadge, Image, Heart,
-  Building, LogOut, Menu, X, ChevronRight
+  Building, LogOut, Menu, X, ChevronRight, Sparkles
 } from 'lucide-react';
 import SiteConfigEditor from './editors/SiteConfigEditor';
 import StatsEditor from './editors/StatsEditor';
@@ -16,6 +16,7 @@ import SpeakingEditor from './editors/SpeakingEditor';
 import MediaEditor from './editors/MediaEditor';
 import FaqEditor from './editors/FaqEditor';
 import ResumeEditor from './editors/ResumeEditor';
+import CvBuilderEditor from './editors/CvBuilderEditor';
 import GalleryEditor from './editors/GalleryEditor';
 import ValuesEditor from './editors/ValuesEditor';
 import LogoEditor from './editors/LogoEditor';
@@ -32,6 +33,7 @@ const sections = [
   { id: 'media', label: 'Media', icon: <Newspaper size={18} /> },
   { id: 'faq', label: 'FAQ', icon: <HelpCircle size={18} /> },
   { id: 'resume', label: 'Resume', icon: <FileBadge size={18} /> },
+  { id: 'cv-builder', label: 'CV Builder', icon: <Sparkles size={18} /> },
   { id: 'gallery', label: 'Gallery', icon: <Image size={18} /> },
   { id: 'values', label: 'Values', icon: <Heart size={18} /> },
   { id: 'logos', label: 'Logo Partners', icon: <Building size={18} /> },
@@ -55,6 +57,7 @@ export default function AdminDashboard() {
       case 'media': return <MediaEditor />;
       case 'faq': return <FaqEditor />;
       case 'resume': return <ResumeEditor />;
+      case 'cv-builder': return <CvBuilderEditor />;
       case 'gallery': return <GalleryEditor />;
       case 'values': return <ValuesEditor />;
       case 'logos': return <LogoEditor />;

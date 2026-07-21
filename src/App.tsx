@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import { AuthProvider, useAuth } from './lib/auth';
+import { AuthProvider } from './lib/auth';
+import { useAuth } from './lib/useAuth';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import InstallPwaBanner from './components/InstallPwaBanner';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -67,6 +69,7 @@ export default function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
+          <InstallPwaBanner />
         </div>
       </AuthProvider>
     </Router>
