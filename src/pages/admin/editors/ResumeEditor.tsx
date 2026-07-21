@@ -1,7 +1,7 @@
+import { useCrud } from './useCrud';
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { SaveButton, InputField, TextAreaField, LoadingState } from './editorUtils';
-import { useCrud } from './editorUtils';
 import type { ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward } from '../../../lib/dataCache';
 
 export default function ResumeEditor() {

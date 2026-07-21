@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Calendar, MessageCircle, Send, CheckCircle } from 
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { useSiteConfig } from '../lib/dataCache';
+import { submitContactForm } from '../lib/supabase';
 
 const inquiryTypes = ['Speaking', 'Advisory', 'Investment', 'General', 'Media'];
 
@@ -29,7 +30,6 @@ export default function ContactPage() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      const { submitContactForm } = await import('../lib/supabase');
       const { error } = await submitContactForm({ name: form.name, email: form.email, inquiry_type: form.inquiryType, message: form.message });
       if (error) throw error;
       setSubmitted(true);

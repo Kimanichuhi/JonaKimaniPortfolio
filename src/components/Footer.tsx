@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, ArrowRight, Twitter, Linkedin, Github } from 'lucide-react';
 import { useSiteConfig } from '../lib/dataCache';
 import { useState } from 'react';
+import { subscribeNewsletter } from '../lib/supabase';
 
 export default function Footer() {
   const { data: siteConfig } = useSiteConfig();
@@ -16,7 +17,6 @@ export default function Footer() {
       return;
     }
     try {
-      const { subscribeNewsletter } = await import('../lib/supabase');
       const { error: supaError } = await subscribeNewsletter(email);
       if (supaError) {
         if (supaError.code === '23505') { setError('Already subscribed!'); } else { setError('Something went wrong. Please try again.'); }

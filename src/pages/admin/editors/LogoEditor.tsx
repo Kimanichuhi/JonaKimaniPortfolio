@@ -1,5 +1,6 @@
+import { useCrud } from './useCrud';
 import { useState } from 'react';
-import { useCrud, SectionHeader, InputField, LoadingState } from './editorUtils';
+import { SectionHeader, InputField, LoadingState } from './editorUtils';
 import type { LogoPartner } from '../../../lib/dataCache';
 
 export default function LogoEditor() {
