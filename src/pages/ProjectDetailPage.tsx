@@ -1,5 +1,5 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Calendar, Tag, CheckCircle, Target, Lightbulb, AlertTriangle, Rocket, Star, ArrowRight, Share2, Copy, Check, Zap, Shield, Users, Globe } from 'lucide-react';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, ExternalLink, Calendar, Tag, CheckCircle, Target, Lightbulb, AlertTriangle, Rocket, Star, ArrowRight, Copy, Check, Zap, Shield, Users, Globe } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import { projects, Project } from '../data/projects';
 import { useEffect, useState } from 'react';
@@ -63,7 +63,6 @@ function RelatedProjects({ currentId }: { currentId: string }) {
 
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
 
   const project = projects.find((p: Project) => p.id === id);
@@ -85,8 +84,6 @@ export default function ProjectDetailPage() {
       </div>
     );
   }
-
-  const otherProjects = projects.filter(p => p.id !== id).slice(0, 4);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(project.url);

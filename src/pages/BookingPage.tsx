@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, Video, MapPin, CheckCircle, Briefcase, Lightbulb, Users, Rocket, ArrowRight, Star, Phone, Mail, MessageSquare } from 'lucide-react';
+import { Calendar, Clock, Video, CheckCircle, Briefcase, Lightbulb, Users, Rocket, ArrowRight, Star, Phone, Mail } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { useSiteConfig } from '../lib/dataCache';

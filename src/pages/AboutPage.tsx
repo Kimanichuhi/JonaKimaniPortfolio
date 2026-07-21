@@ -1,4 +1,4 @@
-import { Lightbulb, Heart, Globe, Users, BookOpen, Award, ExternalLink, Calendar, ArrowRight } from 'lucide-react';
+import { Lightbulb, Heart, Globe, Users, BookOpen, Award, ExternalLink, Calendar } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { useSiteConfig, useTimeline, useGalleryImages, useValues } from '../lib/dataCache';

@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Search, ExternalLink, ArrowRight, Calendar, Tag, Sparkles, Briefcase, Building2, Tractor, Heart, GraduationCap, DollarSign, Home, Users, Palette, BarChart3, X, SortAsc, SortDesc, Grid, List, Copy, Check, Star } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
@@ -184,7 +184,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export default function ProjectsPage() {
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [sortOrder, setSortOrder] = useState<'newest' | 'alpha'>('newest');
