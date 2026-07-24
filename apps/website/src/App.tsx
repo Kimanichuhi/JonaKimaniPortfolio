@@ -37,6 +37,13 @@ function AdminRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function GuestOnlyRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth();
+  if (loading) return <Loading />;
+  if (user) return <Navigate to="/admin" replace />;
+  return <>{children}</>;
+}
+
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
@@ -64,7 +71,7 @@ export default function App() {
               <Route path="/speaking" element={<PublicLayout><SpeakingPage /></PublicLayout>} />
               <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
               <Route path="/resume" element={<PublicLayout><ResumePage /></PublicLayout>} />
-              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/login" element={<GuestOnlyRoute><AdminLogin /></GuestOnlyRoute>} />
               <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
