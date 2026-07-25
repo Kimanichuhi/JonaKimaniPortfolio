@@ -259,4 +259,31 @@ export function useProjects() {
   return { data, refetch: () => { invalidateCache('projects'); fetchTable<ProjectRow>('projects').then(r => { if (r) setData(orderBySort(r)); }); } };
 }
 
-export type { SiteConfig, Stat, Pillar, Testimonial, TimelineEvent, Venture, BlogPost, SpeakingEvent, MediaAppearance, FaqItem, ResumeDatum, ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward, GalleryImage, Value, LogoPartner, ProjectRow };
+interface PageHeaderRow { id?: string; page_key: string; title: string; subtitle: string; }
+
+const defaultPageHeaders = {
+  about: { title: 'About Jonah Kimani', subtitle: "A journey of innovation, leadership, and relentless pursuit of Africa's digital potential." },
+  work: { title: 'Work & Portfolio', subtitle: "Ventures built, teams led, and impact created across Africa's tech ecosystem." },
+  projects: { title: 'My Projects', subtitle: 'Building intelligent digital solutions that solve real-world challenges across Agriculture, Government, Education, Real Estate, Finance, Healthcare, AI, and Enterprise Operations.' },
+  blog: { title: 'Blog & Thought Leadership', subtitle: "Insights on technology, leadership, and building Africa's digital future." },
+  speaking: { title: 'Speaking & Media', subtitle: 'Sharing insights on stages and in publications across the globe.' },
+  contact: { title: 'Get in Touch', subtitle: "Whether it's speaking, advisory, investment, or just a conversation — reach out." },
+  resume: { title: 'Resume / CV', subtitle: 'Professional background, experience, and credentials.' },
+  booking: { title: 'Book a Consultation', subtitle: 'Schedule a one-on-one session with Jonah Kimani to discuss your project, get strategic advice, or explore partnership opportunities.' },
+} satisfies Record<string, { title: string; subtitle: string }>;
+
+export type PageKey = keyof typeof defaultPageHeaders;
+
+export function usePageHeader(key: PageKey) {
+  const [data, setData] = useState<{ title: string; subtitle: string }>(defaultPageHeaders[key]);
+  useEffect(() => {
+    fetchTable<PageHeaderRow>('page_headers').then(r => {
+      const row = r?.find(h => h.page_key === key);
+      if (row) setData({ title: row.title, subtitle: row.subtitle });
+    });
+  }, [key]);
+  return { data };
+}
+
+export { defaultPageHeaders };
+export type { SiteConfig, Stat, Pillar, Testimonial, TimelineEvent, Venture, BlogPost, SpeakingEvent, MediaAppearance, FaqItem, ResumeDatum, ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward, GalleryImage, Value, LogoPartner, ProjectRow, PageHeaderRow };

@@ -4,7 +4,7 @@ import { Search, ExternalLink, ArrowRight, Calendar, Tag, Sparkles, Briefcase, B
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { categories } from '../data/projects';
-import { useProjects, type ProjectRow } from '../lib/dataCache';
+import { useProjects, usePageHeader, type ProjectRow } from '../lib/dataCache';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   ai: <Sparkles size={16} />,
@@ -186,6 +186,7 @@ function ProjectCard({ project, index }: { project: ProjectRow; index: number })
 
 export default function ProjectsPage() {
   const { data: projects } = useProjects();
+  const { data: header } = usePageHeader('projects');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [sortOrder, setSortOrder] = useState<'newest' | 'alpha'>('newest');
@@ -230,10 +231,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="bg-primary-900 text-white min-h-screen">
-      <PageHero
-        title="My Projects"
-        subtitle="Building intelligent digital solutions that solve real-world challenges across Agriculture, Government, Education, Real Estate, Finance, Healthcare, AI, and Enterprise Operations."
-      />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       <section className="py-12 bg-primary-800/30 border-b border-white/5">
         <div className="container-default">

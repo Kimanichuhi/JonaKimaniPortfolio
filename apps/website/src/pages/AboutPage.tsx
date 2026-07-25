@@ -1,7 +1,7 @@
 import { Lightbulb, Heart, Globe, Users, BookOpen, Award, ExternalLink, Calendar } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useSiteConfig, useTimeline, useGalleryImages, useValues } from '../lib/dataCache';
+import { useSiteConfig, useTimeline, useGalleryImages, useValues, usePageHeader } from '../lib/dataCache';
 import { Link } from 'react-router-dom';
 
 const iconComponents: Record<string, React.ReactNode> = {
@@ -18,13 +18,11 @@ export default function AboutPage() {
   const { data: timeline } = useTimeline();
   const { data: values } = useValues();
   const { data: gallery } = useGalleryImages();
+  const { data: header } = usePageHeader('about');
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero
-        title="About Jonah Kimani"
-        subtitle="A journey of innovation, leadership, and relentless pursuit of Africa's digital potential."
-      />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       {/* Bio Section */}
       <section className="section-padding">

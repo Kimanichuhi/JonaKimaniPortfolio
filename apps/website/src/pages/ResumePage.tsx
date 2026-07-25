@@ -1,7 +1,7 @@
 import { Download, Award, Briefcase, GraduationCap, Shield, Zap } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useResumeSummary, useResumeExperience, useResumeEducation, useResumeCertifications, useResumeSkills, useResumeAwards } from '../lib/dataCache';
+import { useResumeSummary, useResumeExperience, useResumeEducation, useResumeCertifications, useResumeSkills, useResumeAwards, usePageHeader } from '../lib/dataCache';
 
 export default function ResumePage() {
   const { data: summary } = useResumeSummary();
@@ -10,10 +10,11 @@ export default function ResumePage() {
   const { data: certifications } = useResumeCertifications();
   const { data: skills } = useResumeSkills();
   const { data: awards } = useResumeAwards();
+  const { data: header } = usePageHeader('resume');
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero title="Resume / CV" subtitle="Professional background, experience, and credentials." />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       <section className="section-padding">
         <div className="container-default">

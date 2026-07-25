@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useVentures } from '../lib/dataCache';
+import { useVentures, usePageHeader } from '../lib/dataCache';
 
 const filters = ['All', 'Founder', 'CEO', 'Investor', 'Advisor'];
 
 export default function WorkPage() {
   const { data: ventures } = useVentures();
+  const { data: header } = usePageHeader('work');
   const [activeFilter, setActiveFilter] = useState('All');
 
   const filtered = activeFilter === 'All'
@@ -16,7 +17,7 @@ export default function WorkPage() {
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero title="Work & Portfolio" subtitle="Ventures built, teams led, and impact created across Africa's tech ecosystem." />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       <section className="py-8 border-b border-white/5">
         <div className="container-default">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, Video, CheckCircle, Briefcase, Lightbulb, Users, Rocket, ArrowRight, Star, Phone, Mail } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useSiteConfig } from '../lib/dataCache';
+import { useSiteConfig, usePageHeader } from '../lib/dataCache';
 
 const consultationTypes = [
   {
@@ -56,6 +56,7 @@ const availableDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
 export default function BookingPage() {
   const { data: siteConfig } = useSiteConfig();
+  const { data: header } = usePageHeader('booking');
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -119,10 +120,7 @@ export default function BookingPage() {
 
   return (
     <div className="bg-primary-900 text-white min-h-screen">
-      <PageHero
-        title="Book a Consultation"
-        subtitle="Schedule a one-on-one session with Jonah Kimani to discuss your project, get strategic advice, or explore partnership opportunities."
-      />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       <section className="py-12 bg-primary-800/30 border-b border-white/5">
         <div className="container-default">

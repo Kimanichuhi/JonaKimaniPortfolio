@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Clock, ArrowRight, Calendar, Tag } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useBlogPosts } from '../lib/dataCache';
+import { useBlogPosts, usePageHeader } from '../lib/dataCache';
 
 const categories = ['All', 'Technology & Innovation', 'Leadership', 'African Tech', 'Entrepreneurship', 'Opinion'];
 
 export default function BlogPage() {
   const { data: blogPosts } = useBlogPosts();
+  const { data: header } = usePageHeader('blog');
   const [activeCategory, setActiveCategory] = useState('All');
 
   const filtered = activeCategory === 'All'
@@ -18,7 +19,7 @@ export default function BlogPage() {
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero title="Blog & Thought Leadership" subtitle="Insights on technology, leadership, and building Africa's digital future." />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       <section className="py-8 border-b border-white/5">
         <div className="container-default">

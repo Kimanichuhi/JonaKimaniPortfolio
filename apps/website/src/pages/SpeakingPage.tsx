@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Mic, Tv, Video, BookOpen, ExternalLink, Calendar, MapPin } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useSpeakingEvents, useMediaAppearances } from '../lib/dataCache';
+import { useSpeakingEvents, useMediaAppearances, usePageHeader } from '../lib/dataCache';
 
 function Users2(props: { size: number }) {
   return (
@@ -30,6 +30,7 @@ const mediaTypeIcons: Record<string, React.ReactNode> = {
 export default function SpeakingPage() {
   const { data: speakingEvents } = useSpeakingEvents();
   const { data: mediaAppearances } = useMediaAppearances();
+  const { data: header } = usePageHeader('speaking');
   const [activeMediaType, setActiveMediaType] = useState('All');
 
   const mediaTypes = ['All', 'Podcast', 'Interview', 'Article', 'Video'];
@@ -39,7 +40,7 @@ export default function SpeakingPage() {
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero title="Speaking & Media" subtitle="Sharing insights on stages and in publications across the globe." />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       <section className="section-padding">
         <div className="container-default">

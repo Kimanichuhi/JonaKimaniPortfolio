@@ -3,9 +3,10 @@ import { useAuth } from '../../lib/useAuth';
 import {
   Settings, BarChart3, Columns, MessageSquare, Clock, Briefcase,
   FileText, Mic, Newspaper, HelpCircle, FileBadge, Image, Heart,
-  Building, LogOut, Menu, X, ChevronRight, Sparkles, Rocket
+  Building, LogOut, Menu, X, ChevronRight, Sparkles, Rocket, Layout
 } from 'lucide-react';
 import SiteConfigEditor from './editors/SiteConfigEditor';
+import PagesEditor from './editors/PagesEditor';
 import StatsEditor from './editors/StatsEditor';
 import PillarsEditor from './editors/PillarsEditor';
 import TestimonialsEditor from './editors/TestimonialsEditor';
@@ -24,6 +25,7 @@ import LogoEditor from './editors/LogoEditor';
 
 const sections = [
   { id: 'site', label: 'Site Config', icon: <Settings size={18} /> },
+  { id: 'pages', label: 'Pages', icon: <Layout size={18} /> },
   { id: 'stats', label: 'Stats', icon: <BarChart3 size={18} /> },
   { id: 'pillars', label: 'Pillars', icon: <Columns size={18} /> },
   { id: 'testimonials', label: 'Testimonials', icon: <MessageSquare size={18} /> },
@@ -49,6 +51,7 @@ export default function AdminDashboard() {
   const renderEditor = () => {
     switch (active) {
       case 'site': return <SiteConfigEditor />;
+      case 'pages': return <PagesEditor />;
       case 'stats': return <StatsEditor />;
       case 'pillars': return <PillarsEditor />;
       case 'testimonials': return <TestimonialsEditor />;

@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Mail, Phone, MapPin, Calendar, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useSiteConfig } from '../lib/dataCache';
+import { useSiteConfig, usePageHeader } from '../lib/dataCache';
 import { submitContactForm } from '../lib/supabase';
 
 const inquiryTypes = ['Speaking', 'Advisory', 'Investment', 'General', 'Media'];
 
 export default function ContactPage() {
   const { data: siteConfig } = useSiteConfig();
+  const { data: header } = usePageHeader('contact');
   const [form, setForm] = useState({ name: '', email: '', inquiryType: 'General', message: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -46,7 +47,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero title="Get in Touch" subtitle="Whether it's speaking, advisory, investment, or just a conversation — reach out." />
+      <PageHero title={header.title} subtitle={header.subtitle} />
 
       <section className="section-padding">
         <div className="container-default">
