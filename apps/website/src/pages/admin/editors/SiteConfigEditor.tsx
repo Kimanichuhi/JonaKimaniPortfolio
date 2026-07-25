@@ -51,6 +51,7 @@ export default function SiteConfigEditor() {
         </div>
         <TextAreaField label="Philosophy Quote" value={config.philosophy_quote ?? ''} onChange={v => set('philosophy_quote', v)} rows={3} />
         <TextAreaField label="Bio" value={config.bio ?? ''} onChange={v => set('bio', v)} rows={5} />
+        <ImageUpload label="Site Logo (replaces the JK badge in the header/footer if set)" folder="site" value={config.logo_url ?? null} onChange={v => set('logo_url', v)} />
         <ImageUpload label="Hero Background Image" folder="site" value={config.hero_image ?? null} onChange={v => set('hero_image', v)} />
         <ImageUpload label="About Page Portrait" folder="site" value={config.about_image ?? null} onChange={v => set('about_image', v)} />
         <div className="flex justify-end pt-2">

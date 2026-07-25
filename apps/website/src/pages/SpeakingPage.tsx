@@ -40,7 +40,7 @@ export default function SpeakingPage() {
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero title={header.title} subtitle={header.subtitle} />
+      <PageHero title={header.title} subtitle={header.subtitle} background={header.background_image ?? undefined} />
 
       <section className="section-padding">
         <div className="container-default">

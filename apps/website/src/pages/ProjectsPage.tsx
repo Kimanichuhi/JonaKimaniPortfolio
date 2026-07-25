@@ -231,7 +231,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="bg-primary-900 text-white min-h-screen">
-      <PageHero title={header.title} subtitle={header.subtitle} />
+      <PageHero title={header.title} subtitle={header.subtitle} background={header.background_image ?? undefined} />
 
       <section className="py-12 bg-primary-800/30 border-b border-white/5">
         <div className="container-default">

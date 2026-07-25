@@ -40,7 +40,11 @@ export default function Header() {
       <div className="container-default">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-accent-500 flex items-center justify-center text-white font-bold text-lg transition-transform group-hover:scale-110">JK</div>
+            {siteConfig.logo_url ? (
+              <img src={siteConfig.logo_url} alt={siteConfig.name} className="w-10 h-10 rounded-lg object-cover transition-transform group-hover:scale-110" />
+            ) : (
+              <div className="w-10 h-10 rounded-lg bg-accent-500 flex items-center justify-center text-white font-bold text-lg transition-transform group-hover:scale-110">JK</div>
+            )}
             <span className="text-white font-semibold text-lg hidden sm:block">{siteConfig.name}</span>
           </Link>
 

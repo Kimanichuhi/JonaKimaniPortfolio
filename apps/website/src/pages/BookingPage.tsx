@@ -140,7 +140,7 @@ export default function BookingPage() {
 
   return (
     <div className="bg-primary-900 text-white min-h-screen">
-      <PageHero title={header.title} subtitle={header.subtitle} />
+      <PageHero title={header.title} subtitle={header.subtitle} background={header.background_image ?? undefined} />
 
       <section className="py-12 bg-primary-800/30 border-b border-white/5">
         <div className="container-default">
@@ -458,14 +458,16 @@ export default function BookingPage() {
         <div className="container-default">
           <AnimatedSection className="text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=150"
-                alt="Jonah Kimani"
-                className="w-12 h-12 rounded-full object-cover border-2 border-accent-500"
-              />
+              {siteConfig.about_image && (
+                <img
+                  src={siteConfig.about_image}
+                  alt={siteConfig.name}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-accent-500"
+                />
+              )}
               <div className="text-left">
-                <div className="text-white font-medium">Jonah Kimani</div>
-                <div className="text-white/50 text-sm">CEO, Qeem Labs Ltd</div>
+                <div className="text-white font-medium">{siteConfig.name}</div>
+                <div className="text-white/50 text-sm">{siteConfig.title}</div>
               </div>
             </div>
             <p className="text-white/60 max-w-xl mx-auto italic">

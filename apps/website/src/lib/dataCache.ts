@@ -72,7 +72,7 @@ function orderBySort<T extends { sort_order?: number }>(items: T[]): T[] {
 }
 
 // --- Interfaces ---
-interface SiteConfig { id?: string; name: string; title: string; tagline: string; roles: string; email: string; phone: string; whatsapp: string; calendly: string; address: string; twitter: string; linkedin: string; github: string; hero_image: string | null; about_image: string | null; philosophy_quote: string; bio: string; }
+interface SiteConfig { id?: string; name: string; title: string; tagline: string; roles: string; email: string; phone: string; whatsapp: string; calendly: string; address: string; twitter: string; linkedin: string; github: string; hero_image: string | null; about_image: string | null; logo_url: string | null; philosophy_quote: string; bio: string; }
 interface Stat { id?: string; value: number; suffix: string; label: string; sort_order?: number; }
 interface Pillar { id?: string; title: string; description: string; icon: string; sort_order?: number; }
 interface Testimonial { id?: string; name: string; title: string; quote: string; rating: number; avatar: string | null; sort_order?: number; }
@@ -103,6 +103,7 @@ const defaultSiteConfig: SiteConfig = {
   linkedin: fallback.siteConfig.social.linkedin, github: fallback.siteConfig.social.github,
   hero_image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=1920',
   about_image: 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=800',
+  logo_url: null,
   philosophy_quote: "Africa doesn't just need technology — it needs technology built for its reality. When we design from the continent, for the continent, we create solutions that the world learns from.",
   bio: "Jonah Kimani is a Kenyan tech entrepreneur and the CEO of Qeem Labs, one of Africa's fastest-growing digital agencies. With over 15 years in the technology sector, he has built and scaled multiple ventures that are shaping the continent's digital landscape.",
 };
@@ -259,31 +260,62 @@ export function useProjects() {
   return { data, refetch: () => { invalidateCache('projects'); fetchTable<ProjectRow>('projects').then(r => { if (r) setData(orderBySort(r)); }); } };
 }
 
-interface PageHeaderRow { id?: string; page_key: string; title: string; subtitle: string; }
+interface PageHeaderRow { id?: string; page_key: string; title: string; subtitle: string; background_image?: string | null; }
 
 const defaultPageHeaders = {
-  about: { title: 'About Jonah Kimani', subtitle: "A journey of innovation, leadership, and relentless pursuit of Africa's digital potential." },
-  work: { title: 'Work & Portfolio', subtitle: "Ventures built, teams led, and impact created across Africa's tech ecosystem." },
-  projects: { title: 'My Projects', subtitle: 'Building intelligent digital solutions that solve real-world challenges across Agriculture, Government, Education, Real Estate, Finance, Healthcare, AI, and Enterprise Operations.' },
-  blog: { title: 'Blog & Thought Leadership', subtitle: "Insights on technology, leadership, and building Africa's digital future." },
-  speaking: { title: 'Speaking & Media', subtitle: 'Sharing insights on stages and in publications across the globe.' },
-  contact: { title: 'Get in Touch', subtitle: "Whether it's speaking, advisory, investment, or just a conversation — reach out." },
-  resume: { title: 'Resume / CV', subtitle: 'Professional background, experience, and credentials.' },
-  booking: { title: 'Book a Consultation', subtitle: 'Schedule a one-on-one session with Jonah Kimani to discuss your project, get strategic advice, or explore partnership opportunities.' },
-} satisfies Record<string, { title: string; subtitle: string }>;
+  about: { title: 'About Jonah Kimani', subtitle: "A journey of innovation, leadership, and relentless pursuit of Africa's digital potential.", background_image: null as string | null },
+  work: { title: 'Work & Portfolio', subtitle: "Ventures built, teams led, and impact created across Africa's tech ecosystem.", background_image: null as string | null },
+  projects: { title: 'My Projects', subtitle: 'Building intelligent digital solutions that solve real-world challenges across Agriculture, Government, Education, Real Estate, Finance, Healthcare, AI, and Enterprise Operations.', background_image: null as string | null },
+  blog: { title: 'Blog & Thought Leadership', subtitle: "Insights on technology, leadership, and building Africa's digital future.", background_image: null as string | null },
+  speaking: { title: 'Speaking & Media', subtitle: 'Sharing insights on stages and in publications across the globe.', background_image: null as string | null },
+  contact: { title: 'Get in Touch', subtitle: "Whether it's speaking, advisory, investment, or just a conversation — reach out.", background_image: null as string | null },
+  resume: { title: 'Resume / CV', subtitle: 'Professional background, experience, and credentials.', background_image: null as string | null },
+  booking: { title: 'Book a Consultation', subtitle: 'Schedule a one-on-one session with Jonah Kimani to discuss your project, get strategic advice, or explore partnership opportunities.', background_image: null as string | null },
+} satisfies Record<string, { title: string; subtitle: string; background_image: string | null }>;
 
 export type PageKey = keyof typeof defaultPageHeaders;
 
 export function usePageHeader(key: PageKey) {
-  const [data, setData] = useState<{ title: string; subtitle: string }>(defaultPageHeaders[key]);
+  const [data, setData] = useState<{ title: string; subtitle: string; background_image: string | null }>(defaultPageHeaders[key]);
   useEffect(() => {
     fetchTable<PageHeaderRow>('page_headers').then(r => {
       const row = r?.find(h => h.page_key === key);
-      if (row) setData({ title: row.title, subtitle: row.subtitle });
+      if (row) setData({ title: row.title, subtitle: row.subtitle, background_image: row.background_image ?? null });
     });
   }, [key]);
   return { data };
 }
 
+interface HomeAboutCard {
+  id?: string; image: string | null; badge_text: string; section_title: string; section_subtitle: string;
+  card_title: string; description: string; link_url: string; link_label: string;
+  stat1_value: string; stat1_label: string; stat2_value: string; stat2_label: string;
+  stat3_value: string; stat3_label: string; stat4_value: string; stat4_label: string;
+}
+
+const defaultHomeAboutCard: HomeAboutCard = {
+  image: 'https://images.pexels.com/photos/3182811/pexels-photo-3182811.jpeg?auto=compress&cs=tinysrgb&w=800',
+  badge_text: 'Est. 2016',
+  section_title: 'Qeem Labs Ltd',
+  section_subtitle: 'A world-class digital agency building innovative solutions from Africa for the global market.',
+  card_title: "Building Africa's Digital Future",
+  description: "Qeem Labs Ltd is a premier digital agency headquartered in Nairobi, Kenya. We specialize in AI-powered solutions, SaaS platforms, and enterprise digital transformation. Our team of 50+ experts serves clients across 8 African countries, delivering world-class products that compete globally.",
+  link_url: 'https://qeemlabs.co.ke',
+  link_label: 'Visit qeemlabs.co.ke',
+  stat1_value: '8+', stat1_label: 'Countries Served',
+  stat2_value: '50+', stat2_label: 'Team Members',
+  stat3_value: '100K+', stat3_label: 'Users Impacted',
+  stat4_value: '$10M+', stat4_label: 'Annual Revenue',
+};
+
+export function useHomeAboutCard() {
+  const [data, setData] = useState<HomeAboutCard>(defaultHomeAboutCard);
+  useEffect(() => {
+    fetchTable<HomeAboutCard>('home_about_card').then(r => { if (r?.[0]) setData(r[0]); });
+  }, []);
+  return { data };
+}
+
 export { defaultPageHeaders };
+export type { HomeAboutCard };
 export type { SiteConfig, Stat, Pillar, Testimonial, TimelineEvent, Venture, BlogPost, SpeakingEvent, MediaAppearance, FaqItem, ResumeDatum, ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward, GalleryImage, Value, LogoPartner, ProjectRow, PageHeaderRow };

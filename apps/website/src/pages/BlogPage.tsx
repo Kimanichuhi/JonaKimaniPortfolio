@@ -19,7 +19,7 @@ export default function BlogPage() {
 
   return (
     <div className="bg-primary-900 text-white">
-      <PageHero title={header.title} subtitle={header.subtitle} />
+      <PageHero title={header.title} subtitle={header.subtitle} background={header.background_image ?? undefined} />
 
       <section className="py-8 border-b border-white/5">
         <div className="container-default">

@@ -34,7 +34,11 @@ export default function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-accent-500 flex items-center justify-center text-white font-bold text-lg">JK</div>
+              {siteConfig.logo_url ? (
+                <img src={siteConfig.logo_url} alt={siteConfig.name} className="w-10 h-10 rounded-lg object-cover" />
+              ) : (
+                <div className="w-10 h-10 rounded-lg bg-accent-500 flex items-center justify-center text-white font-bold text-lg">JK</div>
+              )}
               <span className="font-semibold text-lg">{siteConfig.name}</span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">{siteConfig.tagline}. Building the future of technology from Africa.</p>
