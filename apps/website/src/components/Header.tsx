@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LayoutDashboard } from 'lucide-react';
 import { useSiteConfig } from '../lib/dataCache';
+import { useAuth } from '../lib/useAuth';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -15,6 +16,7 @@ const navLinks = [
 
 export default function Header() {
   const { data: siteConfig } = useSiteConfig();
+  const { user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -48,6 +50,11 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            {user && (
+              <Link to="/admin" className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-accent-400 hover:text-accent-300 hover:bg-white/5 transition-all duration-300">
+                <LayoutDashboard size={16} /> Admin Panel
+              </Link>
+            )}
             <Link to="/resume" className="btn-primary ml-4 !py-2 !px-5 text-sm">Resume</Link>
           </nav>
 
@@ -65,6 +72,11 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            {user && (
+              <Link to="/admin" className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-accent-400 hover:text-accent-300 hover:bg-white/5 transition-all">
+                <LayoutDashboard size={16} /> Admin Panel
+              </Link>
+            )}
             <Link to="/resume" className="btn-primary mt-3 text-sm">Resume</Link>
           </nav>
         </div>
