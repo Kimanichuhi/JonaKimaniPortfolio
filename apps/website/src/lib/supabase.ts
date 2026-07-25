@@ -23,3 +23,19 @@ export async function submitContactForm(data: {
     .insert([data]);
   return { error };
 }
+
+export async function submitBooking(data: {
+  consultation_type: string;
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  date: string;
+  time: string;
+  message: string;
+}) {
+  const { error } = await supabase
+    .from('bookings')
+    .insert([data]);
+  return { error };
+}

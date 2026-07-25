@@ -3,8 +3,13 @@ import { useAuth } from '../../lib/useAuth';
 import {
   Settings, BarChart3, Columns, MessageSquare, Clock, Briefcase,
   FileText, Mic, Newspaper, HelpCircle, FileBadge, Image, Heart,
-  Building, LogOut, Menu, X, ChevronRight, Sparkles, Rocket, Layout
+  Building, LogOut, Menu, X, ChevronRight, Sparkles, Rocket, Layout,
+  LayoutDashboard, Calendar, Mail, Users
 } from 'lucide-react';
+import OverviewPanel from './editors/OverviewPanel';
+import BookingsEditor from './editors/BookingsEditor';
+import MessagesEditor from './editors/MessagesEditor';
+import NewsletterEditor from './editors/NewsletterEditor';
 import SiteConfigEditor from './editors/SiteConfigEditor';
 import PagesEditor from './editors/PagesEditor';
 import StatsEditor from './editors/StatsEditor';
@@ -24,6 +29,10 @@ import ValuesEditor from './editors/ValuesEditor';
 import LogoEditor from './editors/LogoEditor';
 
 const sections = [
+  { id: 'overview', label: 'Overview', icon: <LayoutDashboard size={18} /> },
+  { id: 'bookings', label: 'Bookings', icon: <Calendar size={18} /> },
+  { id: 'messages', label: 'Messages', icon: <Mail size={18} /> },
+  { id: 'newsletter', label: 'Newsletter', icon: <Users size={18} /> },
   { id: 'site', label: 'Site Config', icon: <Settings size={18} /> },
   { id: 'pages', label: 'Pages', icon: <Layout size={18} /> },
   { id: 'stats', label: 'Stats', icon: <BarChart3 size={18} /> },
@@ -45,11 +54,15 @@ const sections = [
 
 export default function AdminDashboard() {
   const { user, signOut } = useAuth();
-  const [active, setActive] = useState('site');
+  const [active, setActive] = useState('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const renderEditor = () => {
     switch (active) {
+      case 'overview': return <OverviewPanel />;
+      case 'bookings': return <BookingsEditor />;
+      case 'messages': return <MessagesEditor />;
+      case 'newsletter': return <NewsletterEditor />;
       case 'site': return <SiteConfigEditor />;
       case 'pages': return <PagesEditor />;
       case 'stats': return <StatsEditor />;
@@ -67,7 +80,7 @@ export default function AdminDashboard() {
       case 'gallery': return <GalleryEditor />;
       case 'values': return <ValuesEditor />;
       case 'logos': return <LogoEditor />;
-      default: return <SiteConfigEditor />;
+      default: return <OverviewPanel />;
     }
   };
 

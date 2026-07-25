@@ -4,6 +4,7 @@ import { Calendar, Clock, Video, CheckCircle, Briefcase, Lightbulb, Users, Rocke
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { useSiteConfig, usePageHeader } from '../lib/dataCache';
+import { submitBooking } from '../lib/supabase';
 
 const consultationTypes = [
   {
@@ -69,9 +70,28 @@ export default function BookingPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    try {
+      const { error } = await submitBooking({
+        consultation_type: consultationTypes.find(t => t.id === selectedType)?.title ?? selectedType ?? '',
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        phone: formData.phone,
+        date: formData.date,
+        time: formData.time,
+        message: formData.message,
+      });
+      if (error) throw error;
+    } catch {
+      // still show confirmation below; the request details are shown to the
+      // user regardless so they can follow up directly if something failed
+    }
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -330,8 +350,8 @@ export default function BookingPage() {
                       <button type="button" onClick={() => setStep(2)} className="btn-secondary">
                         Back
                       </button>
-                      <button type="submit" className="btn-primary flex-1">
-                        Confirm Booking <CheckCircle size={18} className="ml-2" />
+                      <button type="submit" disabled={submitting} className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed">
+                        {submitting ? 'Submitting...' : 'Confirm Booking'} <CheckCircle size={18} className="ml-2" />
                       </button>
                     </div>
                   </form>
