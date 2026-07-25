@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Search, ExternalLink, ArrowRight, Calendar, Tag, Sparkles, Briefcase, Building2, Tractor, Heart, GraduationCap, DollarSign, Home, Users, Palette, BarChart3, X, SortAsc, SortDesc, Grid, List, Copy, Check, Star } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { projects, categories, projectStats, Project } from '../data/projects';
+import { categories } from '../data/projects';
+import { useProjects, type ProjectRow } from '../lib/dataCache';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   ai: <Sparkles size={16} />,
@@ -64,7 +65,7 @@ function StatCounter({ value, suffix, label, delay = 0 }: { value: number; suffi
   );
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project, index }: { project: ProjectRow; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -135,7 +136,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </h3>
 
           <p className="text-white/50 text-sm leading-relaxed mb-4 line-clamp-2">
-            {project.shortDescription}
+            {project.short_description}
           </p>
 
           <div className="flex flex-wrap gap-1.5 mb-4">
@@ -184,10 +185,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export default function ProjectsPage() {
+  const { data: projects } = useProjects();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [sortOrder, setSortOrder] = useState<'newest' | 'alpha'>('newest');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+
+  const projectStats = useMemo(() => ({
+    total: projects.length,
+    industries: new Set(projects.map(p => p.category)).size,
+    aiProjects: projects.filter(p => p.category === 'AI').length,
+    enterprise: projects.filter(p => p.category === 'Operations').length,
+    government: projects.filter(p => p.category === 'Government').length,
+    agriculture: projects.filter(p => p.category === 'Agriculture').length,
+  }), [projects]);
 
   const filteredProjects = useMemo(() => {
     let result = [...projects];
@@ -213,7 +224,7 @@ export default function ProjectsPage() {
     }
 
     return result;
-  }, [searchQuery, activeCategory, sortOrder]);
+  }, [projects, searchQuery, activeCategory, sortOrder]);
 
   const featuredProjects = projects.filter(p => p.featured);
 

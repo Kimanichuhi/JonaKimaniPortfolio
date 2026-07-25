@@ -3,7 +3,7 @@ import { useAuth } from '../../lib/useAuth';
 import {
   Settings, BarChart3, Columns, MessageSquare, Clock, Briefcase,
   FileText, Mic, Newspaper, HelpCircle, FileBadge, Image, Heart,
-  Building, LogOut, Menu, X, ChevronRight, Sparkles
+  Building, LogOut, Menu, X, ChevronRight, Sparkles, Rocket
 } from 'lucide-react';
 import SiteConfigEditor from './editors/SiteConfigEditor';
 import StatsEditor from './editors/StatsEditor';
@@ -11,6 +11,7 @@ import PillarsEditor from './editors/PillarsEditor';
 import TestimonialsEditor from './editors/TestimonialsEditor';
 import TimelineEditor from './editors/TimelineEditor';
 import VenturesEditor from './editors/VenturesEditor';
+import ProjectsEditor from './editors/ProjectsEditor';
 import BlogEditor from './editors/BlogEditor';
 import SpeakingEditor from './editors/SpeakingEditor';
 import MediaEditor from './editors/MediaEditor';
@@ -28,6 +29,7 @@ const sections = [
   { id: 'testimonials', label: 'Testimonials', icon: <MessageSquare size={18} /> },
   { id: 'timeline', label: 'Timeline', icon: <Clock size={18} /> },
   { id: 'ventures', label: 'Ventures', icon: <Briefcase size={18} /> },
+  { id: 'projects', label: 'Projects', icon: <Rocket size={18} /> },
   { id: 'blog', label: 'Blog Posts', icon: <FileText size={18} /> },
   { id: 'speaking', label: 'Speaking', icon: <Mic size={18} /> },
   { id: 'media', label: 'Media', icon: <Newspaper size={18} /> },
@@ -52,6 +54,7 @@ export default function AdminDashboard() {
       case 'testimonials': return <TestimonialsEditor />;
       case 'timeline': return <TimelineEditor />;
       case 'ventures': return <VenturesEditor />;
+      case 'projects': return <ProjectsEditor />;
       case 'blog': return <BlogEditor />;
       case 'speaking': return <SpeakingEditor />;
       case 'media': return <MediaEditor />;

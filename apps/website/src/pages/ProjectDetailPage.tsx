@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Calendar, Tag, CheckCircle, Target, Lightbulb, AlertTriangle, Rocket, Star, ArrowRight, Copy, Check, Zap, Shield, Users, Globe } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
-import { projects, Project } from '../data/projects';
+import { useProjects, type ProjectRow } from '../lib/dataCache';
 import { useEffect, useState } from 'react';
 
 function DetailSection({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
@@ -20,7 +20,7 @@ function DetailSection({ title, icon, children }: { title: string; icon: React.R
   );
 }
 
-function RelatedProjects({ currentId }: { currentId: string }) {
+function RelatedProjects({ currentId, projects }: { currentId: string; projects: ProjectRow[] }) {
   const currentProject = projects.find(p => p.id === currentId);
   if (!currentProject) return null;
 
@@ -53,7 +53,7 @@ function RelatedProjects({ currentId }: { currentId: string }) {
             <h4 className="text-white font-medium group-hover:text-accent-400 transition-colors">
               {project.name}
             </h4>
-            <p className="text-white/50 text-sm mt-1 line-clamp-2">{project.shortDescription}</p>
+            <p className="text-white/50 text-sm mt-1 line-clamp-2">{project.short_description}</p>
           </Link>
         ))}
       </div>
@@ -63,9 +63,10 @@ function RelatedProjects({ currentId }: { currentId: string }) {
 
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const { data: projects } = useProjects();
   const [copied, setCopied] = useState(false);
 
-  const project = projects.find((p: Project) => p.id === id);
+  const project = projects.find((p: ProjectRow) => p.id === id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -320,7 +321,7 @@ export default function ProjectDetailPage() {
             </aside>
           </div>
 
-          <RelatedProjects currentId={project.id} />
+          <RelatedProjects currentId={project.id} projects={projects} />
         </div>
       </main>
     </div>

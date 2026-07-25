@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './supabase';
 import * as fallback from '../data/content';
+import { projects as fallbackProjectsList } from '../data/projects';
 
 type CacheEntry = { data: unknown; timestamp: number };
 const cache = new Map<string, CacheEntry>();
@@ -90,6 +91,8 @@ interface ResumeAward { id?: string; name: string; sort_order?: number; }
 interface GalleryImage { id?: string; url: string; alt: string; sort_order?: number; }
 interface Value { id?: string; title: string; description: string; icon: string; sort_order?: number; }
 interface LogoPartner { id?: string; name: string; sort_order?: number; }
+interface ProjectDetails { overview: string; problem: string; objectives: string[]; features: string[]; architecture: string; challenges: string[]; solutions: string[]; lessons: string[]; futureImprovements: string[]; }
+interface ProjectRow { id: string; name: string; url: string; category: string; description: string; short_description: string; tags: string[]; technologies: string[]; featured: boolean; date: string; image: string | null; details: ProjectDetails; sort_order?: number; }
 
 // --- Fallback data ---
 const defaultSiteConfig: SiteConfig = {
@@ -127,6 +130,11 @@ const fbValues: Value[] = [
   { title: 'Excellence', description: 'Delivering world-class quality that competes on the global stage.', icon: 'Award', sort_order: 6 },
 ];
 const fbLogos: LogoPartner[] = fallback.logoPartners.map((n, i) => ({ name: n, sort_order: i + 1 }));
+const fbProjects: ProjectRow[] = fallbackProjectsList.map((p, i) => ({
+  id: p.id, name: p.name, url: p.url, category: p.category, description: p.description,
+  short_description: p.shortDescription, tags: p.tags, technologies: p.technologies,
+  featured: p.featured, date: p.date, image: p.image, details: p.details, sort_order: i + 1,
+}));
 
 // --- Hooks with caching ---
 export function useSiteConfig() {
@@ -245,4 +253,10 @@ export function useLogoPartners() {
   return { data, refetch: () => { invalidateCache('logo_partners'); fetchTable<LogoPartner>('logo_partners').then(r => { if (r) setData(orderBySort(r)); }); } };
 }
 
-export type { SiteConfig, Stat, Pillar, Testimonial, TimelineEvent, Venture, BlogPost, SpeakingEvent, MediaAppearance, FaqItem, ResumeDatum, ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward, GalleryImage, Value, LogoPartner };
+export function useProjects() {
+  const [data, setData] = useState<ProjectRow[]>(fbProjects);
+  useEffect(() => { fetchTable<ProjectRow>('projects').then(r => { if (r?.length) setData(orderBySort(r)); }); }, []);
+  return { data, refetch: () => { invalidateCache('projects'); fetchTable<ProjectRow>('projects').then(r => { if (r) setData(orderBySort(r)); }); } };
+}
+
+export type { SiteConfig, Stat, Pillar, Testimonial, TimelineEvent, Venture, BlogPost, SpeakingEvent, MediaAppearance, FaqItem, ResumeDatum, ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward, GalleryImage, Value, LogoPartner, ProjectRow };
