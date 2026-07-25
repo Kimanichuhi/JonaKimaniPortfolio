@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Calendar, Tag, CheckCircle, Target, Lightbulb, AlertTriangle, Rocket, Star, ArrowRight, Copy, Check, Zap, Shield, Users, Globe } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
-import { useProjects, type ProjectRow } from '../lib/dataCache';
+import { useProjects, usePageBlock, type ProjectRow } from '../lib/dataCache';
 import { useEffect, useState } from 'react';
 
 function DetailSection({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
@@ -64,6 +64,7 @@ function RelatedProjects({ currentId, projects }: { currentId: string; projects:
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { data: projects } = useProjects();
+  const { data: cta } = usePageBlock('project_detail:cta');
   const [copied, setCopied] = useState(false);
 
   const project = projects.find((p: ProjectRow) => p.id === id);
@@ -308,12 +309,12 @@ export default function ProjectDetailPage() {
                   </div>
 
                   <div className="bg-gradient-to-br from-accent-500/20 to-teal-500/20 backdrop-blur-sm border border-accent-500/20 rounded-2xl p-6">
-                    <h4 className="text-lg font-semibold text-white mb-2">Like what you see?</h4>
+                    <h4 className="text-lg font-semibold text-white mb-2">{cta.title}</h4>
                     <p className="text-white/60 text-sm mb-4">
-                      Let's collaborate on your next project and build something amazing together.
+                      {cta.subtitle}
                     </p>
                     <Link to="/contact" className="btn-primary w-full justify-center text-sm">
-                      Get in Touch <ArrowRight size={16} className="ml-2" />
+                      {cta.link_label} <ArrowRight size={16} className="ml-2" />
                     </Link>
                   </div>
                 </div>

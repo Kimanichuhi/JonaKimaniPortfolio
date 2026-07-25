@@ -316,6 +316,32 @@ export function useHomeAboutCard() {
   return { data };
 }
 
-export { defaultPageHeaders };
+interface PageBlock { id?: string; page_key: string; block_key: string; badge_text: string; title: string; subtitle: string; link_label: string; }
+
+const defaultPageBlocks = {
+  'home:cta1': { badge_text: 'Now Accepting New Clients', title: "Let's Build Something Amazing", subtitle: 'Book a free consultation to discuss your project, get strategic advice, or explore partnership opportunities.', link_label: 'Book a Consultation' },
+  'home:cta2': { badge_text: '', title: 'Stay in the Loop', subtitle: "Get insights on technology, leadership, and Africa's digital transformation delivered to your inbox.", link_label: 'Subscribe to Newsletter' },
+  'about:bio': { badge_text: 'CEO & Founder', title: 'The Man Behind the Mission', subtitle: 'Qeem Labs Ltd', link_label: '' },
+  'about:cta': { badge_text: '', title: "Let's Connect", subtitle: "Whether you have a project in mind, want to explore partnership opportunities, or just want to chat about tech in Africa — I'd love to hear from you.", link_label: '' },
+  'projects:cta': { badge_text: '', title: 'Interested in working together?', subtitle: "Let's build something amazing together. Whether you need a full-stack application, AI integration, or digital transformation consulting.", link_label: '' },
+  'project_detail:cta': { badge_text: '', title: 'Like what you see?', subtitle: "Let's collaborate on your next project and build something amazing together.", link_label: 'Get in Touch' },
+} satisfies Record<string, { badge_text: string; title: string; subtitle: string; link_label: string }>;
+
+export type PageBlockId = keyof typeof defaultPageBlocks;
+
+export function usePageBlock(id: PageBlockId) {
+  const [pageKey, blockKey] = id.split(':');
+  const [data, setData] = useState(defaultPageBlocks[id]);
+  useEffect(() => {
+    fetchTable<PageBlock>('page_blocks').then(r => {
+      const row = r?.find(b => b.page_key === pageKey && b.block_key === blockKey);
+      if (row) setData({ badge_text: row.badge_text, title: row.title, subtitle: row.subtitle, link_label: row.link_label });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+  return { data };
+}
+
+export { defaultPageHeaders, defaultPageBlocks };
 export type { HomeAboutCard };
-export type { SiteConfig, Stat, Pillar, Testimonial, TimelineEvent, Venture, BlogPost, SpeakingEvent, MediaAppearance, FaqItem, ResumeDatum, ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward, GalleryImage, Value, LogoPartner, ProjectRow, PageHeaderRow };
+export type { SiteConfig, Stat, Pillar, Testimonial, TimelineEvent, Venture, BlogPost, SpeakingEvent, MediaAppearance, FaqItem, ResumeDatum, ResumeExperience, ResumeEducation, ResumeCertification, ResumeSkill, ResumeAward, GalleryImage, Value, LogoPartner, ProjectRow, PageHeaderRow, PageBlock };

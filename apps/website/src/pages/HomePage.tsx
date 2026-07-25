@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Eye, Crown, Target, ChevronDown, ChevronUp, Star, ExternalLink, Calendar, Building2, Zap, Globe, Users, Award } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import { useCounter, useScrollPosition } from '../hooks/useAnimations';
-import { useSiteConfig, useStats, usePillars, useTestimonials, useFaqItems, useVentures, useLogoPartners, useHomeAboutCard } from '../lib/dataCache';
+import { useSiteConfig, useStats, usePillars, useTestimonials, useFaqItems, useVentures, useLogoPartners, useHomeAboutCard, usePageBlock } from '../lib/dataCache';
 
 const iconMap: Record<string, React.ReactNode> = {
   Eye: <Eye size={32} />,
@@ -140,6 +140,8 @@ export default function HomePage() {
   const { data: ventures } = useVentures();
   const { data: logoPartners } = useLogoPartners();
   const { data: aboutCard } = useHomeAboutCard();
+  const { data: cta1 } = usePageBlock('home:cta1');
+  const { data: cta2 } = usePageBlock('home:cta2');
   const featuredVenture = ventures[0];
 
   return (
@@ -391,17 +393,19 @@ export default function HomePage() {
       <section className="section-padding bg-gradient-to-r from-accent-500/30 to-teal-500/30">
         <div className="container-default">
           <AnimatedSection className="text-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-              <Calendar size={16} className="text-accent-400" />
-              <span className="text-white/70 text-sm">Now Accepting New Clients</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Build Something <span className="text-gradient">Amazing</span></h2>
+            {cta1.badge_text && (
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                <Calendar size={16} className="text-accent-400" />
+                <span className="text-white/70 text-sm">{cta1.badge_text}</span>
+              </div>
+            )}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{cta1.title}</h2>
             <p className="text-white/60 max-w-xl mx-auto mb-8">
-              Book a free consultation to discuss your project, get strategic advice, or explore partnership opportunities.
+              {cta1.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/booking" className="btn-primary text-lg">
-                <Calendar size={20} className="mr-2" /> Book a Consultation
+                <Calendar size={20} className="mr-2" /> {cta1.link_label}
               </Link>
               <Link to="/contact" className="btn-secondary text-lg">
                 Send a Message
@@ -426,9 +430,9 @@ export default function HomePage() {
       <section className="section-padding bg-gradient-to-r from-accent-500/20 to-teal-500/20">
         <div className="container-default">
           <AnimatedSection className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay in the <span className="text-gradient">Loop</span></h2>
-            <p className="text-white/50 max-w-xl mx-auto mb-8">Get insights on technology, leadership, and Africa's digital transformation delivered to your inbox.</p>
-            <Link to="/contact" className="btn-primary text-lg">Subscribe to Newsletter <ArrowRight size={20} className="ml-2" /></Link>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{cta2.title}</h2>
+            <p className="text-white/50 max-w-xl mx-auto mb-8">{cta2.subtitle}</p>
+            <Link to="/contact" className="btn-primary text-lg">{cta2.link_label} <ArrowRight size={20} className="ml-2" /></Link>
           </AnimatedSection>
         </div>
       </section>

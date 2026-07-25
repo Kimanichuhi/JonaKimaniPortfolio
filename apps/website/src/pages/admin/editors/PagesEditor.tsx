@@ -2,7 +2,16 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import ImageUpload from '../../../components/ImageUpload';
 import { InputField, TextAreaField, ItemCard, SaveButton, LoadingState } from './editorUtils';
-import { defaultPageHeaders, type PageHeaderRow, type PageKey, type HomeAboutCard } from '../../../lib/dataCache';
+import { defaultPageHeaders, defaultPageBlocks, type PageHeaderRow, type PageKey, type HomeAboutCard, type PageBlock, type PageBlockId } from '../../../lib/dataCache';
+
+const blockDefs: { id: PageBlockId; label: string }[] = [
+  { id: 'home:cta1', label: 'Home — "Build Something Amazing" CTA' },
+  { id: 'home:cta2', label: 'Home — Newsletter CTA' },
+  { id: 'about:bio', label: 'About — Bio Badge & Heading' },
+  { id: 'about:cta', label: 'About — "Let\'s Connect" CTA' },
+  { id: 'projects:cta', label: 'Projects — Bottom CTA' },
+  { id: 'project_detail:cta', label: 'Project Detail — Sidebar CTA' },
+];
 
 const pageLabels: Record<PageKey, string> = {
   about: 'About',
@@ -34,13 +43,23 @@ export default function PagesEditor() {
   });
   const [homeCard, setHomeCard] = useState<HomeAboutCard>(emptyHomeCard);
   const [homeCardSaving, setHomeCardSaving] = useState(false);
+  const [blockRows, setBlockRows] = useState<Partial<Record<PageBlockId, PageBlock>>>({});
+  const [blockDrafts, setBlockDrafts] = useState<Record<PageBlockId, PageBlock & { saving: boolean }>>(() => {
+    const initial = {} as Record<PageBlockId, PageBlock & { saving: boolean }>;
+    for (const { id } of blockDefs) {
+      const [page_key, block_key] = id.split(':');
+      initial[id] = { page_key, block_key, ...defaultPageBlocks[id], saving: false };
+    }
+    return initial;
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
       supabase.from('page_headers').select('*'),
       supabase.from('home_about_card').select('*').limit(1).maybeSingle(),
-    ]).then(([headersRes, homeRes]) => {
+      supabase.from('page_blocks').select('*'),
+    ]).then(([headersRes, homeRes, blocksRes]) => {
       const byKey: Partial<Record<PageKey, PageHeaderRow>> = {};
       const nextDrafts = { ...drafts };
       (headersRes.data as PageHeaderRow[] ?? []).forEach(row => {
@@ -51,6 +70,17 @@ export default function PagesEditor() {
       setRows(byKey);
       setDrafts(nextDrafts);
       if (homeRes.data) setHomeCard(homeRes.data as HomeAboutCard);
+
+      const byBlockId: Partial<Record<PageBlockId, PageBlock>> = {};
+      const nextBlockDrafts = { ...blockDrafts };
+      (blocksRes.data as PageBlock[] ?? []).forEach(row => {
+        const id = `${row.page_key}:${row.block_key}` as PageBlockId;
+        byBlockId[id] = row;
+        if (id in nextBlockDrafts) nextBlockDrafts[id] = { ...row, saving: false };
+      });
+      setBlockRows(byBlockId);
+      setBlockDrafts(nextBlockDrafts);
+
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,6 +101,21 @@ export default function PagesEditor() {
       .single();
     if (data) setRows(prev => ({ ...prev, [key]: data as PageHeaderRow }));
     setDraft(key, { saving: false });
+  };
+
+  const setBlockField = (id: PageBlockId, patch: Partial<PageBlock>) =>
+    setBlockDrafts(prev => ({ ...prev, [id]: { ...prev[id], ...patch } }));
+
+  const saveBlock = async (id: PageBlockId) => {
+    setBlockDrafts(prev => ({ ...prev, [id]: { ...prev[id], saving: true } }));
+    const { page_key, block_key, badge_text, title, subtitle, link_label } = blockDrafts[id];
+    const { data } = await supabase
+      .from('page_blocks')
+      .upsert({ page_key, block_key, badge_text, title, subtitle, link_label }, { onConflict: 'page_key,block_key' })
+      .select()
+      .single();
+    if (data) setBlockRows(prev => ({ ...prev, [id]: data as PageBlock }));
+    setBlockDrafts(prev => ({ ...prev, [id]: { ...prev[id], saving: false } }));
   };
 
   const setHomeField = (key: keyof HomeAboutCard, value: string | null) => setHomeCard(prev => ({ ...prev, [key]: value }));
@@ -133,6 +178,24 @@ export default function PagesEditor() {
           <ImageUpload label="Header Background Image (optional)" folder="site" value={drafts[key].background_image} onChange={v => setDraft(key, { background_image: v })} />
           <div className="flex justify-end pt-2">
             <SaveButton saving={drafts[key].saving} onClick={() => save(key)} />
+          </div>
+        </ItemCard>
+      ))}
+
+      <h3 className="text-lg font-bold mt-8 mb-2">Content Blocks</h3>
+      <p className="text-gray-400 text-sm mb-6">Recurring sections (call-to-action blocks, the About bio badge) that appear inline within a page's content.</p>
+      {blockDefs.map(({ id, label }) => (
+        <ItemCard key={id} saving={blockDrafts[id].saving}>
+          <div className="flex items-center justify-between -mt-1 mb-1">
+            <span className="text-sm font-semibold text-white">{label}</span>
+            {!blockRows[id] && <span className="text-xs text-gray-500">Using default (not yet customized)</span>}
+          </div>
+          <InputField label="Badge / Small Label (optional)" value={blockDrafts[id].badge_text} onChange={v => setBlockField(id, { badge_text: v })} />
+          <InputField label="Title" value={blockDrafts[id].title} onChange={v => setBlockField(id, { title: v })} />
+          <TextAreaField label="Subtitle" value={blockDrafts[id].subtitle} onChange={v => setBlockField(id, { subtitle: v })} rows={2} />
+          <InputField label="Button Label (optional)" value={blockDrafts[id].link_label} onChange={v => setBlockField(id, { link_label: v })} />
+          <div className="flex justify-end pt-2">
+            <SaveButton saving={blockDrafts[id].saving} onClick={() => saveBlock(id)} />
           </div>
         </ItemCard>
       ))}

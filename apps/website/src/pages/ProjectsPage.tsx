@@ -4,7 +4,7 @@ import { Search, ExternalLink, ArrowRight, Calendar, Tag, Sparkles, Briefcase, B
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import { categories } from '../data/projects';
-import { useProjects, usePageHeader, type ProjectRow } from '../lib/dataCache';
+import { useProjects, usePageHeader, usePageBlock, type ProjectRow } from '../lib/dataCache';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   ai: <Sparkles size={16} />,
@@ -187,6 +187,7 @@ function ProjectCard({ project, index }: { project: ProjectRow; index: number })
 export default function ProjectsPage() {
   const { data: projects } = useProjects();
   const { data: header } = usePageHeader('projects');
+  const { data: cta } = usePageBlock('projects:cta');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [sortOrder, setSortOrder] = useState<'newest' | 'alpha'>('newest');
@@ -381,9 +382,9 @@ export default function ProjectsPage() {
       <section className="section-padding bg-gradient-to-r from-accent-500/20 to-teal-500/20">
         <div className="container-default">
           <AnimatedSection className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Interested in working together?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{cta.title}</h2>
             <p className="text-white/60 max-w-xl mx-auto mb-8">
-              Let's build something amazing together. Whether you need a full-stack application, AI integration, or digital transformation consulting.
+              {cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/booking" className="btn-primary">

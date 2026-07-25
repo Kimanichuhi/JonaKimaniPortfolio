@@ -1,7 +1,7 @@
 import { Lightbulb, Heart, Globe, Users, BookOpen, Award, ExternalLink, Calendar } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
-import { useSiteConfig, useTimeline, useGalleryImages, useValues, usePageHeader } from '../lib/dataCache';
+import { useSiteConfig, useTimeline, useGalleryImages, useValues, usePageHeader, usePageBlock } from '../lib/dataCache';
 import { Link } from 'react-router-dom';
 
 const iconComponents: Record<string, React.ReactNode> = {
@@ -19,6 +19,8 @@ export default function AboutPage() {
   const { data: values } = useValues();
   const { data: gallery } = useGalleryImages();
   const { data: header } = usePageHeader('about');
+  const { data: bio } = usePageBlock('about:bio');
+  const { data: cta } = usePageBlock('about:cta');
 
   return (
     <div className="bg-primary-900 text-white">
@@ -38,8 +40,8 @@ export default function AboutPage() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary-900/50 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
                   <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
-                    <div className="text-accent-400 font-semibold text-sm">CEO & Founder</div>
-                    <div className="text-white font-bold text-lg">Qeem Labs Ltd</div>
+                    <div className="text-accent-400 font-semibold text-sm">{bio.badge_text}</div>
+                    <div className="text-white font-bold text-lg">{bio.subtitle}</div>
                     <a
                       href="https://qeemlabs.co.ke"
                       target="_blank"
@@ -55,7 +57,7 @@ export default function AboutPage() {
 
             <AnimatedSection delay={0.2}>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                The Man Behind <span className="text-gradient">the Mission</span>
+                {bio.title}
               </h2>
               <div className="space-y-4 text-white/60 leading-relaxed">
                 <p>{siteConfig.bio}</p>
@@ -179,9 +181,9 @@ export default function AboutPage() {
       <section className="section-padding bg-gradient-to-r from-accent-500/20 to-teal-500/20">
         <div className="container-default">
           <AnimatedSection className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Connect</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{cta.title}</h2>
             <p className="text-white/60 max-w-xl mx-auto mb-8">
-              Whether you have a project in mind, want to explore partnership opportunities, or just want to chat about tech in Africa — I'd love to hear from you.
+              {cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/booking" className="btn-primary">
