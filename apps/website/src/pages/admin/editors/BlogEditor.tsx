@@ -39,7 +39,7 @@ export default function BlogEditor() {
             </label>
             <InputField label="Sort Order" value={editing.sort_order ?? 0} onChange={v => setEditing(p => ({ ...p, sort_order: Number(v) }))} type="number" />
           </div>
-          <ImageUpload label="Featured Image" value={editing.image ?? null} onChange={v => setEditing(p => ({ ...p, image: v }))} />
+          <ImageUpload label="Featured Image" folder="blog" value={editing.image ?? null} onChange={v => setEditing(p => ({ ...p, image: v }))} />
           <TextAreaField label="Full Content" value={editing.content ?? ''} onChange={v => setEditing(p => ({ ...p, content: v }))} rows={8} placeholder="Markdown supported" />
           <div className="flex justify-end gap-2 pt-2">
             <button onClick={() => setEditing({})} className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg text-sm hover:bg-gray-600 transition-colors">Cancel</button>

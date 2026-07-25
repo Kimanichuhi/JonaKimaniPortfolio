@@ -134,7 +134,7 @@ export default function ProjectsEditor() {
           <TextAreaField label="Full Description" value={editing.description ?? ''} onChange={v => setEditing(p => ({ ...p, description: v }))} rows={3} />
           <InputField label="Tags (comma-separated)" value={arrayToCsv(editing.tags)} onChange={v => setEditing(p => ({ ...p, tags: csvToArray(v) }))} placeholder="AI, Agriculture, Analytics" />
           <InputField label="Technologies (comma-separated)" value={arrayToCsv(editing.technologies)} onChange={v => setEditing(p => ({ ...p, technologies: csvToArray(v) }))} placeholder="React, TypeScript, Supabase" />
-          <ImageUpload label="Preview Image" value={editing.image ?? null} onChange={v => setEditing(p => ({ ...p, image: v }))} />
+          <ImageUpload label="Preview Image" folder="projects" value={editing.image ?? null} onChange={v => setEditing(p => ({ ...p, image: v }))} />
 
           <div className="pt-2 border-t border-gray-800">
             <h3 className="text-sm font-semibold text-gray-400 mb-3 mt-3">Case Study Details</h3>

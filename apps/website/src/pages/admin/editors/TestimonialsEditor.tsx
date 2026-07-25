@@ -25,7 +25,7 @@ export default function TestimonialsEditor() {
             <InputField label="Sort Order" value={editing.sort_order ?? 0} onChange={v => setEditing(p => ({ ...p, sort_order: Number(v) }))} type="number" />
           </div>
           <TextAreaField label="Quote" value={editing.quote ?? ''} onChange={v => setEditing(p => ({ ...p, quote: v }))} rows={3} />
-          <ImageUpload label="Avatar" value={editing.avatar ?? null} onChange={v => setEditing(p => ({ ...p, avatar: v }))} />
+          <ImageUpload label="Avatar" folder="testimonials" value={editing.avatar ?? null} onChange={v => setEditing(p => ({ ...p, avatar: v }))} />
           <div className="flex justify-end gap-2 pt-2">
             <button onClick={() => setEditing({})} className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg text-sm hover:bg-gray-600 transition-colors">Cancel</button>
             <SaveButton saving={saving} onClick={() => { save(editing).then(() => setEditing({})); }} />

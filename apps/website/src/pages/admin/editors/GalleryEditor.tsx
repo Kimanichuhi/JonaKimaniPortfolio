@@ -17,7 +17,7 @@ export default function GalleryEditor() {
       <SectionHeader title="Gallery Images" onAdd={startAdd} />
       {Object.keys(editing).length > 0 && (
         <ItemCard onDelete={editing.id ? () => { remove(editing.id!); setEditing({}); } : undefined} saving={saving}>
-          <ImageUpload label="Image" value={editing.url ?? null} onChange={v => setEditing(p => ({ ...p, url: v ?? '' }))} />
+          <ImageUpload label="Image" folder="gallery" value={editing.url ?? null} onChange={v => setEditing(p => ({ ...p, url: v ?? '' }))} />
           <InputField label="Alt Text" value={editing.alt ?? ''} onChange={v => setEditing(p => ({ ...p, alt: v }))} />
           <InputField label="Sort Order" value={editing.sort_order ?? 0} onChange={v => setEditing(p => ({ ...p, sort_order: Number(v) }))} type="number" />
           <div className="flex justify-end gap-2 pt-2">

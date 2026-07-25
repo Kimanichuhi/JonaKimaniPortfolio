@@ -6,9 +6,10 @@ interface ImageUploadProps {
   value: string | null;
   onChange: (url: string | null) => void;
   label?: string;
+  folder?: string;
 }
 
-export default function ImageUpload({ value, onChange, label = 'Image' }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, label = 'Image', folder = 'uploads' }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,7 +27,7 @@ export default function ImageUpload({ value, onChange, label = 'Image' }: ImageU
     setError('');
 
     const ext = file.name.split('.').pop();
-    const path = `uploads/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const path = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
 
     const { error: uploadError } = await supabase.storage
       .from('portfolio-images')

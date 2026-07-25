@@ -33,7 +33,7 @@ export default function VenturesEditor() {
           </div>
           <TextAreaField label="Description" value={editing.description ?? ''} onChange={v => setEditing(p => ({ ...p, description: v }))} rows={3} />
           <TextAreaField label="Achievements (one per line)" value={(editing.achievements ?? []).join('\n')} onChange={setAch} rows={4} />
-          <ImageUpload label="Image" value={editing.image ?? null} onChange={v => setEditing(p => ({ ...p, image: v }))} />
+          <ImageUpload label="Image" folder="ventures" value={editing.image ?? null} onChange={v => setEditing(p => ({ ...p, image: v }))} />
           <div className="flex justify-end gap-2 pt-2">
             <button onClick={() => setEditing({})} className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg text-sm hover:bg-gray-600 transition-colors">Cancel</button>
             <SaveButton saving={saving} onClick={() => { save(editing as Partial<Venture>).then(() => setEditing({})); }} />
